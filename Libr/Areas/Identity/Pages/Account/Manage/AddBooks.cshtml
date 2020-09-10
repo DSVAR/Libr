@@ -1,0 +1,27 @@
+﻿@page
+@model AddBooksModel
+@{
+    ViewData["Title"] = "Добавление книг";
+    ViewData["ActivePage"] = ManageNavPages.AddBooks;
+}
+
+<h4>@ViewData["Title"]</h4>
+
+<div class="row">
+    <div class="col-md-6">
+        <p>@Model.Hello()</p>
+        <p>
+            <strong>Deleting this data will permanently remove your account, and this cannot be recovered1.</strong>
+        </p>
+        <form id="download-data" method="post" class="form-group" asp-action="">
+            <button class="btn btn-primary" type="submit">Добавить</button>
+        </form>
+        <p>
+            <a id="delete" asp-page="DeletePersonalData" class="btn btn-primary">Delete1</a>
+        </p>
+    </div>
+</div>
+
+@*@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}*@
