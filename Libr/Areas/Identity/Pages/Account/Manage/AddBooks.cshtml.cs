@@ -14,11 +14,20 @@ namespace Libr.Areas.Identity.Pages.Account.permission
     {
         private readonly UserManager<IdentityUser> _userManager;
         private readonly ILogger<PersonalDataModel> _logger;
-        //public void OnGet()
-        //{
-        //}
+        public void OnGet()
+        {
+            
+        }
 
-       
+        public string Dest { get; set; }
+
+        public IActionResult OnPost()
+        { 
+            Dest = "suka";
+            return Page();
+        }
+
+     
         public string Hello()
         {
             return "Hello ASP.NET";

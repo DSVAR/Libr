@@ -6,22 +6,43 @@
 }
 
 <h4>@ViewData["Title"]</h4>
+<form method="post">
+    <div class="row">
+        <div class="col-md-6">
 
-<div class="row">
-    <div class="col-md-6">
-        <p>@Model.Hello()</p>
-        <p>
-            <strong>Deleting this data will permanently remove your account, and this cannot be recovered1.</strong>
-        </p>
-        <form id="download-data" method="post" class="form-group" asp-action="">
-            <button class="btn btn-primary" type="submit">Добавить</button>
-        </form>
-        <p>
-            <a id="delete" asp-page="DeletePersonalData" class="btn btn-primary">Delete1</a>
-        </p>
+            <ul>
+                <li>
+                    <label>Автор:</label>
+                    <input />
+                </li>
+                <li>
+                    <label>Название книги:</label>
+                    <input />
+                </li>
+                <li>
+                    <label>Описание:</label>
+                    <input />
+                </li>
+                <li>
+                    <label>Количество:@Model.Dest</label>
+                    <input />
+                </li>
+
+
+            </ul>
+            <div>
+                <div class="custom-file ">
+                    <input class="custom-file-input form-control" />
+                    <label class="custom-file-label text-left ">Фото книги</label>
+                </div>
+            </div>
+            
+            <button id="btn1" onclick="OnClicks" runat="server" type="submit">Save</button>
+
+     
+        </div>
     </div>
-</div>
-
+</form>
 @*@section Scripts {
-    <partial name="_ValidationScriptsPartial" />
-}*@
+        <partial name="_ValidationScriptsPartial" />
+    }*@
