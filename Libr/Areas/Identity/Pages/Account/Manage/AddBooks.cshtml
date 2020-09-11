@@ -13,26 +13,32 @@
             <ul>
                 <li>
                     <label>Автор:</label>
-                    <input />
+                    <input asp-for="books.Author"/>
                 </li>
                 <li>
                     <label>Название книги:</label>
-                    <input />
+                    <input asp-for="books.Name"/>
                 </li>
                 <li>
                     <label>Описание:</label>
-                    <input />
+                    <input asp-for="books.description"/>
                 </li>
                 <li>
                     <label>Количество:@Model.Dest</label>
                     <input />
                 </li>
+                <li>
+                    <label>Жанр</label>
+                    <select asp-for="books.genres" asp-items="Html.GetEnumSelectList<Models_book.Genre>()">
+                        <option value="загрузить фото"/>
+                    </select>
 
+                </li>
 
             </ul>
             <div>
                 <div class="custom-file ">
-                    <input class="custom-file-input form-control" />
+                    <input class="custom-file-input form-control" asp-for="photo"/>
                     <label class="custom-file-label text-left ">Фото книги</label>
                 </div>
             </div>
@@ -42,6 +48,17 @@
      
         </div>
     </div>
+    @section Scripts{
+        <script>
+            $(document).ready(function () {
+                $('.custom-file-input').on("change", function () {
+                    var fileName = $(this).val().split("\\").pop();
+                    $(this).next('.custom-file-label').html(fileName);
+                });
+            });
+        </script>
+     }
+
 </form>
 @*@section Scripts {
         <partial name="_ValidationScriptsPartial" />

@@ -11,10 +11,10 @@ namespace Models_book
 {
     public class books
     {
-        public int id { get; set; }
         public string Name { get; set; }
         public string Author { get; set; }
         public string description { get; set; }
+        public int count { get; set; }
         public string PhotoPath { get; set; }
         public Genre?  genres {get;set;}
     }
