@@ -25,11 +25,11 @@
                 </li>
                 <li>
                     <label>Количество:@Model.Dest</label>
-                    <input />
+                    <input asp-for="books.count"/>
                 </li>
                 <li>
                     <label>Жанр</label>
-                    <select asp-for="books.genres" asp-items="Html.GetEnumSelectList<Models_book.Genre>()">
+                    <select asp-for="books.genres" asp-items="Html.GetEnumSelectList<Libr.Models.Genre>()">
                         <option value="загрузить фото"/>
                     </select>
 
