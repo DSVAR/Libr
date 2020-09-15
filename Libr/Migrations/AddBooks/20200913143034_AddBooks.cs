@@ -1,8 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
+using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace Libr.Migrations.AddBooks
 {
-    public partial class addbooks : Migration
+    public partial class AddBooks : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -10,7 +11,9 @@ namespace Libr.Migrations.AddBooks
                 name: "Books",
                 columns: table => new
                 {
-                    Name = table.Column<string>(nullable: false),
+                    ID = table.Column<int>(nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Name = table.Column<string>(nullable: true),
                     Author = table.Column<string>(nullable: true),
                     description = table.Column<string>(nullable: true),
                     count = table.Column<int>(nullable: false),
@@ -19,7 +22,7 @@ namespace Libr.Migrations.AddBooks
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Books", x => x.Name);
+                    table.PrimaryKey("PK_Books", x => x.ID);
                 });
         }
 

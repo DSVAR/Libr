@@ -9,8 +9,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Libr.Migrations.AddBooks
 {
     [DbContext(typeof(AddBooksContext))]
-    [Migration("20200912232348_addbooks")]
-    partial class addbooks
+    [Migration("20200913143034_AddBooks")]
+    partial class AddBooks
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -22,10 +22,15 @@ namespace Libr.Migrations.AddBooks
 
             modelBuilder.Entity("Libr.Models.book", b =>
                 {
-                    b.Property<string>("Name")
-                        .HasColumnType("text");
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
                     b.Property<string>("Author")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Name")
                         .HasColumnType("text");
 
                     b.Property<string>("PhotoPath")
@@ -40,7 +45,7 @@ namespace Libr.Migrations.AddBooks
                     b.Property<int?>("genres")
                         .HasColumnType("integer");
 
-                    b.HasKey("Name");
+                    b.HasKey("ID");
 
                     b.ToTable("Books");
                 });

@@ -6,48 +6,51 @@
 }
 
 <h4>@ViewData["Title"]</h4>
-<form method="post">
+<form method="post" enctype="multipart/form-data">
     <div class="row">
         <div class="col-md-6">
 
             <ul>
                 <li>
                     <label>Автор:</label>
-                    <input asp-for="books.Author"/>
+                    <input asp-for="books.Author" />
                 </li>
                 <li>
                     <label>Название книги:</label>
-                    <input asp-for="books.Name"/>
+                    <input asp-for="books.Name" />
                 </li>
                 <li>
                     <label>Описание:</label>
-                    <input asp-for="books.description"/>
+                    <input asp-for="books.description" />
                 </li>
                 <li>
                     <label>Количество:@Model.Dest</label>
-                    <input asp-for="books.count"/>
+                    <input asp-for="books.count" value="1" />
                 </li>
                 <li>
                     <label>Жанр</label>
                     <select asp-for="books.genres" asp-items="Html.GetEnumSelectList<Libr.Models.Genre>()">
-                        <option value="загрузить фото"/>
+                        <option>Выберите жанр</option>
                     </select>
-
                 </li>
 
+
             </ul>
+            
             <div>
                 <div class="custom-file ">
-                    <input class="custom-file-input form-control" asp-for="photo"/>
+                    <input asp-for="photo" class="custom-file-input form-control" />
                     <label class="custom-file-label text-left ">Фото книги</label>
                 </div>
             </div>
-            
-            <button id="btn1" onclick="OnClicks" runat="server" type="submit">Save</button>
+            <button type="submit">Save</button>
 
-     
+
         </div>
     </div>
+
+
+</form>
     @section Scripts{
         <script>
             $(document).ready(function () {
@@ -58,8 +61,3 @@
             });
         </script>
      }
-
-</form>
-@*@section Scripts {
-        <partial name="_ValidationScriptsPartial" />
-    }*@

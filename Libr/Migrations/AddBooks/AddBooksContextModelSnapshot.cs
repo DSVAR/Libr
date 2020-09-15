@@ -20,10 +20,15 @@ namespace Libr.Migrations.AddBooks
 
             modelBuilder.Entity("Libr.Models.book", b =>
                 {
-                    b.Property<string>("Name")
-                        .HasColumnType("text");
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
                     b.Property<string>("Author")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Name")
                         .HasColumnType("text");
 
                     b.Property<string>("PhotoPath")
@@ -38,7 +43,7 @@ namespace Libr.Migrations.AddBooks
                     b.Property<int?>("genres")
                         .HasColumnType("integer");
 
-                    b.HasKey("Name");
+                    b.HasKey("ID");
 
                     b.ToTable("Books");
                 });

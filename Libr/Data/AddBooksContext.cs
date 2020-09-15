@@ -13,26 +13,6 @@ namespace Libr.Data
 
         public DbSet<book> Books { get; set; }
 
-
-        //public AddBooksContext (DbContextOptions options):base(options){
-        //    Database.EnsureCreated();
-        //}
-
-        //protected override void OnModelCreating(ModelBuilder model)
-        //{
-        //    base.OnModelCreating(model);
-
-        //    model.Entity<book>().HasData(new book
-        //    {
-        //        Author = "",
-        //        Name="",
-        //        count=1,
-        //        description="описание",
-        //        PhotoPath="rout"
-
-        //    }); 
-        //}
-
         public AddBooksContext()
         {
             Database.EnsureCreated();
