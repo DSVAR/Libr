@@ -19,7 +19,7 @@ namespace Libr.Areas.Identity.Pages.Account.permission
     public class AddBooksModel : PageModel
     {
         readonly IWebHostEnvironment _IwebHostEnvironment;
-      BookRepository db=new BookRepository(BooksContext)
+        BookRepository bd=new BookRepository();
 
         public AddBooksModel(IWebHostEnvironment webHostEnvironment)
         {

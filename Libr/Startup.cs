@@ -45,6 +45,7 @@ namespace Libr
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
             services.AddTransient<IBookView<book>, BookRepository>();
+
             services.AddScoped<BookRepository>();
 
             services.AddRazorPages();
