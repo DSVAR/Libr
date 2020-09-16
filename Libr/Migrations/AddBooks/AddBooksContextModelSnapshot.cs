@@ -7,7 +7,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace Libr.Migrations.AddBooks
 {
-    [DbContext(typeof(AddBooksContext))]
+    [DbContext(typeof(BooksContext))]
     partial class AddBooksContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)

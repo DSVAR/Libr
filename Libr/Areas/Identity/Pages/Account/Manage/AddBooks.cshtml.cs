@@ -1,6 +1,7 @@
 using Libr.Models;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using System.Collections;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -10,16 +11,21 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.CodeAnalysis.Options;
 using System;
 using System.IO;
+using Libr.Data.Repository;
+using Libr.Data.Interfaces;
 
 namespace Libr.Areas.Identity.Pages.Account.permission
 {
     public class AddBooksModel : PageModel
     {
         readonly IWebHostEnvironment _IwebHostEnvironment;
+      BookRepository db=new BookRepository(BooksContext)
 
         public AddBooksModel(IWebHostEnvironment webHostEnvironment)
         {
             _IwebHostEnvironment = webHostEnvironment;
+           
+
         }
         
         public string Dest { get; set; }
@@ -34,17 +40,13 @@ namespace Libr.Areas.Identity.Pages.Account.permission
 
         public IActionResult OnPost()
         {
+           
             books.PhotoPath = UpLoadFile();
             
             if (books.Author != null && books.Name != null && books.count != 0 && books.PhotoPath != null && books.genres!=null )
             {
-
-                books.Author = UpLoadFile();
-                using (AddBooksContext db = new AddBooksContext())
-                {
-                    db.Books.Add(books);
-                    db.SaveChanges();
-                }
+                bd.Add(books);
+               bd.Save();
                 return RedirectToPage("AddBooks");
             }
             else return RedirectToPage("index");

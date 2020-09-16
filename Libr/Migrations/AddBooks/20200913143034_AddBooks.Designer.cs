@@ -8,7 +8,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace Libr.Migrations.AddBooks
 {
-    [DbContext(typeof(AddBooksContext))]
+    [DbContext(typeof(BooksContext))]
     [Migration("20200913143034_AddBooks")]
     partial class AddBooks
     {

@@ -12,11 +12,15 @@ using Libr.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Libr.Data.Interfaces;
+using Libr.Data.Repository;
+using Libr.Models;
 
 namespace Libr
 {
     public class Startup
     {
+        public string connection;
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -31,12 +35,18 @@ namespace Libr
                 options.UseNpgsql(
                     Configuration.GetConnectionString("DefaultConnection")));
 
-            //services.AddDbContext<AddBooksContext>(options =>
-            //   options.UseNpgsql(
-            //       Configuration.GetConnectionString("DefaultConnection")));
+
+            services.AddDbContext<BooksContext>(options =>
+               options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
+          
+            
 
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
+
+            services.AddTransient<IBookView<book>, BookRepository>();
+            services.AddScoped<BookRepository>();
+
             services.AddRazorPages();
         }
 
