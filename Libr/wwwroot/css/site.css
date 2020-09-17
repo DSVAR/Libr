@@ -69,3 +69,8 @@ body {
   white-space: nowrap;
   line-height: 60px; /* Vertically center the text there */
 }
+
+.NewLine{
+    margin:0;
+    padding:0 0 5px 0;
+}

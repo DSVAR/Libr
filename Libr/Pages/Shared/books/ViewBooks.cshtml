@@ -6,7 +6,7 @@
 <div class="row">
     @foreach(var item in Model.Books)
     {
-        var PhotoPath = $"/images/2b00d8e8-d779-4882-b66b-3e43e36cdb15__19ef4bcaf0bd814308f8e8fe5ed32b87e9d2043d_full.jpg";
+        var PhotoPath = $"/images/{item.PhotoPath}";
 
         <div class="col-12 col-sm-6 col-lg-4">
             <div class="card-deck">
@@ -21,7 +21,7 @@
 
                     <div class="text-center card-footer">
                         <a asp-page="#" asp-route-ID="@item.ID" class="btn btn-success m-1">Оформить</a>
-                        <a asp-page="#" asp-route-ID="@item.ID" class="btn btn-success m-1">Изменить</a>
+                        <a asp-page="/Shared/books/DetailOfBook" asp-route-ID="@item.ID" class="btn btn-success m-1">Изменить</a>
                         <a asp-page="#" asp-route-ID="@item.ID" class="btn btn-success m-1">Удалить</a>
                     </div>
                 </div>
