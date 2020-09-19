@@ -13,6 +13,7 @@ using System;
 using System.IO;
 using Libr.Data.Repository;
 using Libr.Data.Interfaces;
+using Libr.RepeatsCodes;
 
 namespace Libr.Areas.Identity.Pages.Account.permission
 {
@@ -41,7 +42,8 @@ namespace Libr.Areas.Identity.Pages.Account.permission
         public IActionResult OnPost()
         {
            
-            books.PhotoPath = UpLoadFile();
+            books.PhotoPath = SaveFile.UpLoadFile(photo,_IwebHostEnvironment);
+            
             
             if (books.Author != null && books.Name != null && books.count != 0 && books.PhotoPath != null && books.genres!=null )
             {
@@ -53,21 +55,7 @@ namespace Libr.Areas.Identity.Pages.Account.permission
         }
 
 
-        private string UpLoadFile()
-        {
-            string folder = Path.Combine(_IwebHostEnvironment.WebRootPath, "images");
-            string UniqName = null;
-            if (photo != null)
-            {
-                UniqName = Guid.NewGuid().ToString() + "__" + photo.FileName;
-                string FilePath = Path.Combine(folder, UniqName);
-                using (var fs = new FileStream(FilePath, FileMode.Create))
-                {
-                    photo.CopyTo(fs);
-                }
-            }
-            return UniqName;
-        }
+
 
 
     }

@@ -2,48 +2,63 @@
 @model Libr.Pages.Shared.books.DetailOfBookModel
 @{
     ViewData["Title"] = "Details";
-    var photoPath = $"/images/{Model.Book.PhotoPath}";
+    var photoPath = $"/images/{Model.Book.PhotoPath ?? "noimage.png"}";
+    
 }
 
-
-<div class="row justify-content-center m-5">
-    <div class="col col-lg-8 col-sm-3">
-        <div class="card">
-            <div class="card-header text-center">
-                <img  class="card-img-top border border-primary" src="@photoPath" />
-            </div>
-
-            <div class="card-body">
-                <div class="text-left">
-                    <h5 style="color:blueviolet">Название книги:@Model.Book.Name </h5>
-                    <h5  style="color:brown">Автор:@Model.Book.Author</h5>
-                    <h5 style="color:greenyellow">Жанр:@Model.Book.genres</h5>
+<form actio="" method="post">
+    <div class="row justify-content-center m-4">
+        <div class="col col-lg-6 col-sm-4">
+            <div class="card">
+                <div class="card-header text-center ">
+                 <img class="card-img-top border border-primary rounded" src="@photoPath" />
                 </div>
-            </div>
 
-            <div class="border border-dark"  >
-                
-                    <input value="@Model.Book.description" />
-                
-            </div>
-            
-            <div>
-                <input  asp-for="photo"  class="custom-file-input form-control" />
-                <label class="custom-file-label text-left"></label>
-            </div>
+                <div class="card-body">
+                    <div class="text-left">
+                        <h1 class="text-center">@Model.Book.Name</h1>
+                        <h5>Автор:@Model.Book.Author</h5>
+                        <h5>Жанр:@Model.Book.genres</h5>
+                    </div>
+                </div>
 
-            <div class="row">
-                <div class="col">
-                    <div class="card-footer text-center">
-                        <a asp-page="/Shared/books/ViewBooks" class="btn btn-dark">Назад</a>
-                        <button type="submit">Обновить</button>
+                <div class="border border-dark">
+
+                      <input  class="InputInherit" value="@Model.Book.description"  asp-for="Book.description"/>
+                 
+
+                </div>
+
+                <div>
+                    <div class="custom-file ">
+                        <input asp-for="photo" class="custom-file-input form-control" />
+                        <label class="custom-file-label text-left ">Фото книги</label>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col">
+                        <div class="card-footer text-center">
+                            <a asp-page="/Shared/books/ViewBooks" class="btn btn-dark">Назад</a>
+                            <button class="btn btn-warning"   type="submit">Обновить</button>
+                            <button class="btn btn-danger" asp-page-handler="Delete"   type="submit">Удалить</button>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
+</form>
 
-@section Scripts{ 
-@Scripts.Render("/js/UpLoad.js");
+
+
+@section Scripts{
+    <script>
+            $(document).ready(function () {
+                $('.custom-file-input').on("change", function () {
+                    var fileName = $(this).val().split("\\").pop();
+                    $(this).next('.custom-file-label').html(fileName);
+                });
+            });
+    </script>
 }

@@ -2,15 +2,17 @@
 using Libr.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
-namespace Libr.Migrations.AddBooks
+namespace Libr.Migrations.Books
 {
     [DbContext(typeof(BooksContext))]
-    partial class AddBooksContextModelSnapshot : ModelSnapshot
+    [Migration("20200919103101_AddBooks")]
+    partial class AddBooks
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -41,6 +43,9 @@ namespace Libr.Migrations.AddBooks
                         .HasColumnType("text");
 
                     b.Property<int?>("genres")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("price")
                         .HasColumnType("integer");
 
                     b.HasKey("ID");

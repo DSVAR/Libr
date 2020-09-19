@@ -6,11 +6,11 @@ using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
-namespace Libr.Migrations.AddBooks
+namespace Libr.Migrations.Cart
 {
-    [DbContext(typeof(BooksContext))]
-    [Migration("20200913143034_AddBooks")]
-    partial class AddBooks
+    [DbContext(typeof(CartContext))]
+    [Migration("20200919145403_Cart")]
+    partial class Cart
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -20,34 +20,37 @@ namespace Libr.Migrations.AddBooks
                 .HasAnnotation("ProductVersion", "3.1.8")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
-            modelBuilder.Entity("Libr.Models.book", b =>
+            modelBuilder.Entity("Libr.Data.Models.Cart", b =>
                 {
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
-                    b.Property<string>("Author")
-                        .HasColumnType("text");
+                    b.Property<int>("IDBook")
+                        .HasColumnType("integer");
 
-                    b.Property<string>("Name")
-                        .HasColumnType("text");
-
-                    b.Property<string>("PhotoPath")
+                    b.Property<string>("NameBook")
                         .HasColumnType("text");
 
                     b.Property<int>("count")
                         .HasColumnType("integer");
 
-                    b.Property<string>("description")
+                    b.Property<int>("idBook")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("ip")
                         .HasColumnType("text");
 
-                    b.Property<int?>("genres")
+                    b.Property<string>("login")
+                        .HasColumnType("text");
+
+                    b.Property<int>("priceBook")
                         .HasColumnType("integer");
 
                     b.HasKey("ID");
 
-                    b.ToTable("Books");
+                    b.ToTable("Carts");
                 });
 #pragma warning restore 612, 618
         }

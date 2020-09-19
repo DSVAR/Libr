@@ -15,14 +15,15 @@
                         <img class="card-img-top" src="@PhotoPath"  />
                     </div>
 
-                    <div class=" text-center" style="text-decoration-color:aqua">
-                        <h3>@item.Name @item.Author</h3>
+                    <div class="text-center  card-group">
+                        <h3 >@item.Name </h3>
+                        <h3 style="color:darkcyan"> &nbsp;@item.Author</h3>
                     </div>
 
                     <div class="text-center card-footer">
                         <a asp-page="#" asp-route-ID="@item.ID" class="btn btn-success m-1">Оформить</a>
-                        <a asp-page="/Shared/books/DetailOfBook" asp-route-ID="@item.ID" class="btn btn-success m-1">Изменить</a>
-                        <a asp-page="#" asp-route-ID="@item.ID" class="btn btn-success m-1">Удалить</a>
+                        <a asp-page="/Shared/books/DetailOfBook" asp-route-ID="@item.ID" class="btn btn-primary m-1">Изменить</a>
+                        <a asp-page="#" asp-route-ID="@item.ID" class="btn btn-danger m-1">Удалить</a>
                     </div>
                 </div>
             </div>

@@ -38,8 +38,9 @@ namespace Libr
 
             services.AddDbContext<BooksContext>(options =>
                options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
-          
-            
+            services.AddDbContext<CartContext>(options =>
+             options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
+
 
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
@@ -47,6 +48,7 @@ namespace Libr
             //services.AddTransient<IBookView<book>, BookRepository>();
 
             services.AddScoped<BookRepository>();
+            services.AddScoped<CartRepository>();
 
             services.AddRazorPages();
         }

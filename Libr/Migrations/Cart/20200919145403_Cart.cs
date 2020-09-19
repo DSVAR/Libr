@@ -1,35 +1,36 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
-namespace Libr.Migrations.AddBooks
+namespace Libr.Migrations.Cart
 {
-    public partial class AddBooks : Migration
+    public partial class Cart : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Books",
+                name: "Carts",
                 columns: table => new
                 {
                     ID = table.Column<int>(nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    Name = table.Column<string>(nullable: true),
-                    Author = table.Column<string>(nullable: true),
-                    description = table.Column<string>(nullable: true),
-                    count = table.Column<int>(nullable: false),
-                    PhotoPath = table.Column<string>(nullable: true),
-                    genres = table.Column<int>(nullable: true)
+                    login = table.Column<string>(nullable: true),
+                    ip = table.Column<string>(nullable: true),
+                    IDBook = table.Column<int>(nullable: false),
+                    NameBook = table.Column<string>(nullable: true),
+                    idBook = table.Column<int>(nullable: false),
+                    priceBook = table.Column<int>(nullable: false),
+                    count = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Books", x => x.ID);
+                    table.PrimaryKey("PK_Carts", x => x.ID);
                 });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Books");
+                name: "Carts");
         }
     }
 }

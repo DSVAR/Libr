@@ -24,8 +24,12 @@
                     <input asp-for="books.description" />
                 </li>
                 <li>
-                    <label>Количество:@Model.Dest</label>
-                    <input asp-for="books.count" value="1" />
+                    <label>Количество:</label>
+                    <input asp-for="books.count" min="0" value="1" />
+                </li>
+                <li>
+                    <label>Цена:</label>
+                    <input asp-for="books.price" min="0" value="1" />
                 </li>
                 <li>
                     <label>Жанр</label>
