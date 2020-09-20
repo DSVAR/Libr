@@ -35,12 +35,15 @@
                         <label class="custom-file-label text-left ">Фото книги</label>
                     </div>
                 </div>
+                
+           
+
 
                 <div class="row">
                     <div class="col">
                         <div class="card-footer text-center">
                             <a asp-page="/Shared/books/ViewBooks" class="btn btn-dark">Назад</a>
-                            <button class="btn btn-warning"   type="submit">Обновить</button>
+                            <button class="btn btn-warning"  asp-page-handler="Update" type="submit">Обновить</button>
                             <button class="btn btn-danger" asp-page-handler="Delete"   type="submit">Удалить</button>
                         </div>
                     </div>

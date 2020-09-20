@@ -3,35 +3,45 @@
 @{
 }
 
-<div class="row">
-    @foreach(var item in Model.Books)
-    {
-        var PhotoPath = $"/images/{item.PhotoPath}";
+<form method="post" asp-action="GetOffer" asp-controller="ViewBooksModel" >
+    <div class="row">
+        @foreach (var item in Model.Books)
+        {
+            var PhotoPath = $"/images/{item.PhotoPath}";
 
-        <div class="col-12 col-sm-6 col-lg-4">
-            <div class="card-deck">
-                <div class="card m-4">
-                    <div class="text-center">
-                        <img class="card-img-top" src="@PhotoPath"  />
-                    </div>
+            <div class="col-12 col-sm-6 col-lg-4">
+                <div class="card-deck">
+                    <div class="card m-4">
+                        <div class="text-center">
+                            <img class="card-img-top" src="@PhotoPath" />
+                        </div>
 
-                    <div class="text-center  card-group">
-                        <h3 >@item.Name </h3>
-                        <h3 style="color:darkcyan"> &nbsp;@item.Author</h3>
-                    </div>
+                        <div class="text-center  card-group">
+                            <h3>@item.Name </h3>
+                            <h3 style="color:darkcyan"> &nbsp;@item.Author</h3>
+                        </div>
 
-                    <div class="text-center card-footer">
-                        <a asp-page="#" asp-route-ID="@item.ID" class="btn btn-success m-1">Оформить</a>
-                        <a asp-page="/Shared/books/DetailOfBook" asp-route-ID="@item.ID" class="btn btn-primary m-1">Изменить</a>
-                        <a asp-page="#" asp-route-ID="@item.ID" class="btn btn-danger m-1">Удалить</a>
+                        <div class="text-left" >
+                            <p>
+                                Количествo:
+                                <input class="text-center" asp-for="carts.count" min="1" value="1" style="width:15%" />
+                                <a class="ItsaTrap">@item.price P</a>
+                            </p>
+                        </div>
+
+                        <div class="text-center card-footer">
+                            <button asp-page-handler="Offer" asp-route-ID="@item.ID" name="action" value="OnGet" class="btn btn-success m-1">В корзину</button>
+                            <a asp-page="/Shared/books/DetailOfBook" asp-route-ID="@item.ID" class="btn btn-primary m-1">Изменить</a>
+                            <a asp-page="#" asp-route-ID="@item.ID" class="btn btn-danger m-1">Удалить</a>
+                        </div>
                     </div>
                 </div>
+
             </div>
 
-        </div>
+        }
 
-    }
-
-</div>
+    </div>
+</form>
 
 
