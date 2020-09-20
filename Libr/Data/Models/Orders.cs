@@ -6,18 +6,16 @@ using System.Threading.Tasks;
 
 namespace Libr.Data.Models
 {
-    public class Cart
+    public class Orders
     {
         [Key]
         public int ID { get; set; }
-        public string login { get; set; }
-        public string ip { get; set; }
-        public int IDBook { get; set; }
-        public string NameBook { get; set; }
+        public string Book { get; set; }
         public string Author { get; set; }
-        public ushort priceBook { get; set; }
-        public ushort count { get; set; }
-
+        public string LoginUser { get; set; }
+        public int count { get; set; }
+        public ushort Price { get; set; }
+        public bool Accept { get; set; }
 
     }
 }

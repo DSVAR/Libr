@@ -40,7 +40,8 @@ namespace Libr
                options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
             services.AddDbContext<CartContext>(options =>
              options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
-
+            services.AddDbContext<OrdersContext>(options =>
+            options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
@@ -49,6 +50,7 @@ namespace Libr
 
             services.AddScoped<BookRepository>();
             services.AddScoped<CartRepository>();
+            services.AddScoped<OrdersRepository>();
 
             services.AddRazorPages();
         }

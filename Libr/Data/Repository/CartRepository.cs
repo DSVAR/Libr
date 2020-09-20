@@ -23,13 +23,22 @@ namespace Libr.Data.Repository
             
         }
 
-        public Cart CartItem(string loginOrIP)
+        public IEnumerable<Cart> CartItem(string login, string ip)
         {
-            Cart CartItem = db.Carts.Find(loginOrIP);
-            if (CartItem != null)
-                return CartItem;
-            else return null;//НЕЛЬЗЯ ВОЗРАЩАТЬ ПУСТОТУ!!!
+            if (login == null)
+            {
+                return db.Carts.Where(log => log.ip == ip);
+            }
+            else
+            {
+                return db.Carts.Where(x => x.login ==login);
+            }
         }
+
+         public Cart objectCart(int id)
+         {
+            return db.Carts.Find(id);
+         }
 
         public void clear(string loginOrIP)
         {
@@ -38,7 +47,8 @@ namespace Libr.Data.Repository
                 db.Carts.RemoveRange(CartItem);
         }
 
-     
+      
+
         public void save()
         {
             db.SaveChanges();

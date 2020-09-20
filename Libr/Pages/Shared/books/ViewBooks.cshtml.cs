@@ -33,8 +33,7 @@ namespace Libr.Pages.Shared
         public void OnGet()
         {
           Books = bd.GetBooksList();
-            login = HttpContext.User.Identity.Name;
-            ip = HttpContext.Connection.LocalIpAddress.ToString();
+         
            
 
         }
@@ -47,11 +46,12 @@ namespace Libr.Pages.Shared
             Book = bd.objectBook(id);
             carts.IDBook = Book.ID;
             carts.NameBook = Book.Name;
+            carts.Author = Book.Author;
             carts.priceBook = Book.price;
 
             CR.Buy(carts);
             CR.save();
-
+            OnGet();
         }
     }
 }

@@ -17,7 +17,7 @@ namespace Libr.Migrations.Cart
                     ip = table.Column<string>(nullable: true),
                     IDBook = table.Column<int>(nullable: false),
                     NameBook = table.Column<string>(nullable: true),
-                    idBook = table.Column<int>(nullable: false),
+                    Author = table.Column<string>(nullable: true),
                     priceBook = table.Column<int>(nullable: false),
                     count = table.Column<int>(nullable: false)
                 },

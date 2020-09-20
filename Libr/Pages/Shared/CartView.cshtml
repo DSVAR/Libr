@@ -1,0 +1,56 @@
+﻿@page
+@model Libr.Pages.Shared.CartViewModel
+@{
+}
+
+<form method="post">
+    <div class="container-fluid border">
+        <div class="row border">
+            <div class="col-md-3 border">
+                Колличество
+            </div>
+            <div class="col-md-6 border">
+                Название
+            </div>
+
+            <div class="col-md-3 border">
+                Цена
+            </div>
+
+            @foreach (var item in Model.Carts)
+            {
+                <div class="container-fluid border" >
+                    <div class="row border">
+                        <div class="col-md-3 border-dark">
+                            <h6>@item.count</h6>
+                        </div>
+
+                        <div class="col-md-6 border-dark">
+                            <h6>@item.NameBook</h6>
+                        </div>
+                        <div class="col-md-3 border-dark">
+                            <h6>@item.priceBook</h6>
+                        </div>
+                    </div>
+
+                </div>
+            }
+        </div>
+    </div>
+
+    <div class="container-fluid ">
+        <div class="row ">
+            <div class="col-3">
+                <p>Общая стоимость:@Model.FullPrice</p>
+            </div>
+            <div class="col-3">
+                <p>Количесвто книг:@Model.FullCount</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="row float-right">
+        <button asp-page-handler="Order"  style="padding-right:10%" class="btn btn-success">Купить</button>
+        <button asp-page-handler="Cleaning" class="btn btn-danger">Очистить корзину</button>
+    </div>
+</form>

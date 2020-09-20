@@ -9,7 +9,8 @@ namespace Libr.Data.Interfaces
     public interface ICartView<T> where T:class
     {
         //IEnumerable<T> GetCartList();
-        Cart CartItem(string loginOrIP);
+        IEnumerable<T> CartItem(string login, string ip);
+        Cart objectCart(int id);
         void clear(string loginOrIP);
         void Buy(T Item);
 
