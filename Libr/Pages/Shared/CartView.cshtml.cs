@@ -71,20 +71,20 @@ namespace Libr.Pages.Shared
             login = HttpContext.User.Identity.Name;
             ip = HttpContext.Connection.RemoteIpAddress.ToString();
             Carts = db.CartItem(login, ip);
-            foreach(var item in Carts) 
-            { 
+            foreach (var item in Carts)
+            {
                 cart = db.objectCart(item.ID);
                 orders.Book = cart.NameBook;
                 orders.Author = cart.Author;
                 orders.count = cart.count;
                 orders.Price = cart.priceBook;
                 orders.LoginUser = login;
-                        orders.Accept = false;
-                        OR.Add(orders);
+                orders.Accept = false;
+                OR.Add(orders);
             }
             OR.save();
 
-              
+
             OnGet();
         }
     }
