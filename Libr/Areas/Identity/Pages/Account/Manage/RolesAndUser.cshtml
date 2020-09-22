@@ -1,0 +1,73 @@
+﻿@page
+@model Libr.Areas.Identity.Pages.Account.Manage.RolesAndUserModel
+@{
+}
+
+<form method="post">
+    <div class="container-fluid">
+        <div class="row border">
+            <div class="col-md-3 border">
+                Id пользователя
+            </div>
+            <div class="col-md-3 border">
+                Имя пользователя
+            </div>
+            <div class="col-md-2 border">
+                Админ
+            </div>
+            <div class="col-md-2 border">
+                Библиотекарь
+            </div>
+            <div class="col-md-2 border">
+                Обнулить
+            </div>
+            @foreach (var item in Model.users)
+            {
+                <div class="container-fluid">
+                    <div class="row border">
+                        <div class="border col-md-3">
+                            @item.Id
+                        </div>
+
+                        <div class="border col-md-3">
+                            @item.UserName
+                        </div>
+                        <button asp-page-handler="Admin" class="btn btn-success col-md-2">Назначить</button>
+                        <button asp-page-handler="Librarian" class="btn btn-primary col-md-2">Назначить</button>
+                        <button asp-page-handler="DownGrade" class="btn btn-danger col-md-2">Снять</button>
+                    </div>
+                </div>
+
+
+            }
+
+            @foreach (var item in Model.role)
+            {
+                <div class="container-fluid">
+                    <div class="row border">
+                        <div class="border col-md-3">
+                            @item.Id
+                        </div>
+
+                        <div class="border col-md-3">
+                            @item.Name
+                        </div>
+                    </div>
+                </div>
+
+
+            }
+        </div>
+    </div>
+
+
+    <div class="paddup container-fluid border-0">
+        <p>Добавить новую роль</p>
+        <div class="row">
+
+            <input asp-for=@Model.Name class="col-md-9" />
+            <button  asp-page-handler="NewRole" class="bnt btn-success col-md-3">Добавить</button>
+        </div>
+    </div>
+
+</form>

@@ -14,7 +14,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Libr.Data.Interfaces;
 using Libr.Data.Repository;
-using Libr.Models;
+using Libr.Areas.Identity.Pages.Account.Manage;
 
 namespace Libr
 {
@@ -24,6 +24,7 @@ namespace Libr
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
+           
         }
 
         public IConfiguration Configuration { get; }
@@ -43,15 +44,19 @@ namespace Libr
             services.AddDbContext<OrdersContext>(options =>
             options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
 
-            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-                .AddEntityFrameworkStores<ApplicationDbContext>();
+            //services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+            //    .AddEntityFrameworkStores<ApplicationDbContext>();
+            services.AddIdentity<IdentityUser, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = true)
+        .AddEntityFrameworkStores<ApplicationDbContext>();
 
-            //services.AddTransient<IBookView<book>, BookRepository>();
+
 
             services.AddScoped<BookRepository>();
             services.AddScoped<CartRepository>();
             services.AddScoped<OrdersRepository>();
 
+            services.AddTransient<UserManager<IdentityUser>>();
+            services.AddTransient<ApplicationDbContext>();
             services.AddRazorPages();
         }
 
@@ -77,7 +82,7 @@ namespace Libr
 
             app.UseAuthentication();
             app.UseAuthorization();
-
+          
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapRazorPages();
