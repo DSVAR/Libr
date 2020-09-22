@@ -16,6 +16,8 @@ namespace Libr.Areas.Identity.Pages.Account.Manage
        public IEnumerable<IdentityUser> users;
         public IEnumerable<IdentityRole> role;
         public UserManager<IdentityUser> UM;
+        [BindProperty]
+        public IdentityUser user { get; set; }
      
       [BindProperty]
         public string Name { get; set; }
@@ -46,10 +48,22 @@ namespace Libr.Areas.Identity.Pages.Account.Manage
             return Page();
         }
 
-        public async Task<IActionResult> OnPostAdmin()
+        public async void OnPostAdmin(string id)
         {
-           // await UM.AddToRoleAsync()
-            return Page();
+            string ID;
+            //var item = Db.Users.FindAsync(id);
+            users = Db.Users.ToList();
+            foreach (var item in users)
+            {
+                if (item.Id == id)
+                { 
+                //   ID  = item.Id.ToString();
+                user = item;
+                }
+
+            }
+            await UM.AddToRoleAsync(user, "Admin");
+            OnGet();
         }
     }
 }

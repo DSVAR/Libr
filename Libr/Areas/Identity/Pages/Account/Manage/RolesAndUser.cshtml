@@ -32,7 +32,7 @@
                         <div class="border col-md-3">
                             @item.UserName
                         </div>
-                        <button asp-page-handler="Admin" class="btn btn-success col-md-2">Назначить</button>
+                        <button asp-route-Id=@item.Id asp-page-handler="Admin" class="btn btn-success col-md-2">Назначить</button>
                         <button asp-page-handler="Librarian" class="btn btn-primary col-md-2">Назначить</button>
                         <button asp-page-handler="DownGrade" class="btn btn-danger col-md-2">Снять</button>
                     </div>

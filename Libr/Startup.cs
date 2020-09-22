@@ -15,6 +15,8 @@ using Microsoft.Extensions.Hosting;
 using Libr.Data.Interfaces;
 using Libr.Data.Repository;
 using Libr.Areas.Identity.Pages.Account.Manage;
+using Microsoft.AspNetCore.Identity.UI.Services;
+using Libr.Areas.Identity.Pages.Account;
 
 namespace Libr
 {
@@ -44,19 +46,25 @@ namespace Libr
             services.AddDbContext<OrdersContext>(options =>
             options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
 
-            //services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-            //    .AddEntityFrameworkStores<ApplicationDbContext>();
-            services.AddIdentity<IdentityUser, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = true)
-        .AddEntityFrameworkStores<ApplicationDbContext>();
+            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+                .AddRoles<IdentityRole>()
+                .AddEntityFrameworkStores<ApplicationDbContext>();
+            //    services.AddIdentity<IdentityUser, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = true)
+            //.AddEntityFrameworkStores<ApplicationDbContext>();
+            //неправильно написанный код в userManager!
 
 
 
             services.AddScoped<BookRepository>();
             services.AddScoped<CartRepository>();
             services.AddScoped<OrdersRepository>();
+            services.AddScoped<UserManager<IdentityUser>>();
 
-            services.AddTransient<UserManager<IdentityUser>>();
-            services.AddTransient<ApplicationDbContext>();
+
+            //services.AddTransient<UserManager<IdentityUser>>();
+            //services.AddTransient<ApplicationDbContext>();
+
+            //services.AddTransient<IEmailSender, RegisterModel>();
             services.AddRazorPages();
         }
 
