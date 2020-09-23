@@ -34,14 +34,14 @@
                         </div>
                         <button asp-route-Id=@item.Id asp-page-handler="Admin" class="btn btn-success col-md-2">Назначить</button>
                         <button asp-page-handler="Librarian" class="btn btn-primary col-md-2">Назначить</button>
-                        <button asp-page-handler="DownGrade" class="btn btn-danger col-md-2">Снять</button>
+                        <button asp-route-Id=@item.Id asp-page-handler="DownGrade" class="btn btn-danger col-md-2">Снять</button>
                     </div>
                 </div>
 
 
             }
 
-            @*@foreach (var item in Model.role)
+            @foreach (var item in Model.role)
             {
                 <div class="container-fluid">
                     <div class="row border">
@@ -56,7 +56,8 @@
                 </div>
 
 
-            }*@
+            }
+            <div>121</div>
         </div>
     </div>
 

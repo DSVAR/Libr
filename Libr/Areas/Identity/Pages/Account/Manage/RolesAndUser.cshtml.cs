@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Libr.Data;
 using Microsoft.AspNetCore.Identity;
 using Libr.Data.Models;
+using Libr.Data.Repository;
 
 namespace Libr.Areas.Identity.Pages.Account.Manage
 {
@@ -16,24 +17,26 @@ namespace Libr.Areas.Identity.Pages.Account.Manage
        public IEnumerable<IdentityUser> users;
         public IEnumerable<IdentityRole> role;
         public UserManager<IdentityUser> UM;
+        public IdentityRole UserRole;
+     
         [BindProperty]
         public IdentityUser user { get; set; }
      
       [BindProperty]
         public string Name { get; set; }
         
-        public RolesAndUserModel(ApplicationDbContext context, UserManager<IdentityUser> UMContext)
+        public RolesAndUserModel(ApplicationDbContext context, UserManager<IdentityUser> UMContext, UserAndRolesRepo Repocontext)
         {
             Db = context;
             UM = UMContext;
-         
+            Rol = Repocontext;
         }
 
-        public void OnGet()
+        public  void OnGet()
         {
         users= Db.Users.ToList();
             role = Db.Roles.ToList();
-           
+ 
         }
 
        
@@ -62,10 +65,31 @@ namespace Libr.Areas.Identity.Pages.Account.Manage
                 }
 
             }
-      
-            await UM.AddToRoleAsync(user, "Admin");
+
+            //await UM.AddToRoleAsync(user, "Admin");
+            await Rol.UpUserAsync(user, "Admin");
             OnGet();
             return Page();
+        }
+
+        public async Task<IActionResult> OnPostDownGrade(string id) 
+        {
+            string ID;
+            //var item = Db.Users.FindAsync(id);
+            users = Db.Users.ToList();
+            foreach (var U in users)
+            {
+                if (U.Id == id)
+                {
+                    //   ID  = item.Id.ToString();
+                    user = U;
+                }
+
+            }
+           await Rol.downUser(user);
+            OnGet();
+            return Page();
+
         }
     }
 }

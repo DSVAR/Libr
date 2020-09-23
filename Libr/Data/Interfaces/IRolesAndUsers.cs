@@ -14,7 +14,7 @@ namespace Libr.Data.Interfaces
         void save();
         void AddRole(string name);
         Task UpUserAsync(T users,string role);
-        void downUser(int id);
+        Task downUser(T users);
   
     }
 }

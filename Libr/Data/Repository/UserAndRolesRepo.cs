@@ -8,21 +8,17 @@ using System.Threading.Tasks;
 
 namespace Libr.Data.Repository
 {
-    public class UserAndRolesRepo:IRolesAndUsers<IdentityUser>
+    public class UserAndRolesRepo : IRolesAndUsers<IdentityUser>
     {
         private readonly ApplicationDbContext db;
-        private static UserManager<IdentityUser> UM;
-        User user;
+        private readonly UserManager<IdentityUser> UM;
 
-       public UserAndRolesRepo(ApplicationDbContext context, UserManager<IdentityUser> UMcontext)
+        public UserAndRolesRepo(ApplicationDbContext context, UserManager<IdentityUser> UMcontext)
         {
             db = context;
-          //  UM = UMcontext;
-        }
-        public static void seed( UserManager<IdentityUser> UMcontext)
-        {
             UM = UMcontext;
         }
+
 
         public IEnumerable<IdentityUser> GetUsers()
         {
@@ -46,13 +42,14 @@ namespace Libr.Data.Repository
 
         public async Task UpUserAsync(IdentityUser users, string role)
         {
-            
+            var RoleNow = db.UserRoles.Find(users);
+            await UM.RemoveFromRoleAsync(users, RoleNow.ToString()) ;
             await UM.AddToRoleAsync(users, role);
         }
 
-        public void downUser(int id)
+        public async Task downUser(IdentityUser users)
         {
-            throw new NotImplementedException();
+            await UM.AddToRoleAsync(users, "User");
         }
 
 

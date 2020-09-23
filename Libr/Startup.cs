@@ -59,6 +59,7 @@ namespace Libr
             services.AddScoped<CartRepository>();
             services.AddScoped<OrdersRepository>();
             services.AddScoped<UserManager<IdentityUser>>();
+            services.AddScoped<UserAndRolesRepo>();
 
 
             //services.AddTransient<UserManager<IdentityUser>>();
