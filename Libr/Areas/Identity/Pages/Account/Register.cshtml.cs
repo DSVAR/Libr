@@ -94,8 +94,9 @@ namespace Libr.Areas.Identity.Pages.Account
 
                     if (_userManager.Options.SignIn.RequireConfirmedAccount)
                     {
-                  await  _userManager.AddToRoleAsync(user, "User");
+                        await _userManager.AddToRoleAsync(user, "User");
                         return RedirectToPage("RegisterConfirmation", new { email = Input.Email, returnUrl = returnUrl });
+                  
                     }
                     else
                     {

@@ -48,22 +48,24 @@ namespace Libr.Areas.Identity.Pages.Account.Manage
             return Page();
         }
 
-        public async void OnPostAdmin(string id)
+        public async Task<IActionResult> OnPostAdmin(string id)
         {
             string ID;
             //var item = Db.Users.FindAsync(id);
             users = Db.Users.ToList();
-            foreach (var item in users)
+            foreach (var U in users)
             {
-                if (item.Id == id)
+                if (U.Id == id)
                 { 
                 //   ID  = item.Id.ToString();
-                user = item;
+                user = U;
                 }
 
             }
+      
             await UM.AddToRoleAsync(user, "Admin");
             OnGet();
+            return Page();
         }
     }
 }
