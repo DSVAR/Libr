@@ -12,6 +12,7 @@ namespace Libr.Data.Repository
     {
         private readonly ApplicationDbContext db;
         private readonly UserManager<IdentityUser> UM;
+        private IdentityUser user { get; set; }
 
         public UserAndRolesRepo(ApplicationDbContext context, UserManager<IdentityUser> UMcontext)
         {
@@ -24,12 +25,6 @@ namespace Libr.Data.Repository
         {
            return db.Users.ToList();
         }
-
-        //public IEnumerable<User> GetRoles()
-        //{
-        //    throw new NotImplementedException();
-        //}
-
         public void save()
         {
             db.SaveChanges();
@@ -42,16 +37,27 @@ namespace Libr.Data.Repository
 
         public async Task UpUserAsync(IdentityUser users, string role)
         {
-            var RoleNow = db.UserRoles.Find(users);
-            await UM.RemoveFromRoleAsync(users, RoleNow.ToString()) ;
+
             await UM.AddToRoleAsync(users, role);
         }
 
-        public async Task downUser(IdentityUser users)
+        public async Task downUser(string id)
         {
-            await UM.AddToRoleAsync(users, "User");
+            string[] role = { "Admin", "Librarian" };
+            await UM.RemoveFromRolesAsync(user, role);
         }
 
+        public IEnumerable<IdentityUser> allGetUser(IdentityUser user)
+        {
+            return db.Users.ToList();
+        }
+
+        public async Task<bool> GetRole(string id,string role)
+        {
+            
+            user = await UM.FindByIdAsync(id);
+            return await UM.IsInRoleAsync(user, role);
+        }
 
     }
 }

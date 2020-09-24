@@ -74,6 +74,13 @@ namespace Libr.Areas.Identity.Pages.Account.Manage
             return Page();
         }
 
+        public async Task<IActionResult> OnPostLibrarian(string id)
+        {
+          user=  await  UM.FindByIdAsync(id);
+          await  Rol.UpUserAsync(user, "Librarian");
+            OnGet();
+            return Page();
+        }
         public async Task<IActionResult> OnPostDownGrade(string id) 
         {
          
@@ -87,7 +94,7 @@ namespace Libr.Areas.Identity.Pages.Account.Manage
                 }
 
             }
-            await Rol.downUser(user);
+        //    await Rol.downUser(user);
             OnGet();
             return Page();
 

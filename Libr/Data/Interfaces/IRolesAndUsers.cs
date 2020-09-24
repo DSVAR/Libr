@@ -14,7 +14,9 @@ namespace Libr.Data.Interfaces
         void save();
         void AddRole(string name);
         Task UpUserAsync(T users,string role);
-        Task downUser(T users);
+        Task downUser(string id);
+        IEnumerable<T> allGetUser(T user);
+        Task<bool> GetRole(string id, string role);
   
     }
 }

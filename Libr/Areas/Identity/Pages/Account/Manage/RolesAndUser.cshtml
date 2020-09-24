@@ -41,9 +41,13 @@
                         {
                             <button asp-route-Id=@item.Id asp-page-handler="Admin" class="btn btn-success col-md-2">Назначить</button>
                         }
-
-                        <button asp-page-handler="Librarian" class="btn btn-primary col-md-2">Назначить</button>
-
+                        @if (await Model.Getrole(item, "Librarian"))
+                        {
+                            <button disabled asp-page-handler="Librarian" class="btn btn-primary col-md-2">Назначить</button>
+                        }
+                        else { 
+                        <button asp-route-Id=@item.Id asp-page-handler="Librarian" class="btn btn-primary col-md-2">Назначить</button>
+                        }
                         <button asp-route-Id=@item.Id asp-page-handler="DownGrade" class="btn btn-danger col-md-2">Снять</button>
                     </div>
                 </div>
@@ -68,7 +72,6 @@
 
 
             }
-            <div>121</div>
         </div>
     </div>
 
