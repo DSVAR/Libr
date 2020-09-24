@@ -16,7 +16,7 @@
                 Админ
             </div>
             <div class="col-md-2 border">
-                Анимешник
+                Библиотекарь
             </div>
             <div class="col-md-2 border">
                 Обнулить
@@ -32,8 +32,18 @@
                         <div class="border col-md-3">
                             @item.UserName
                         </div>
-                        <button asp-route-Id=@item.Id asp-page-handler="Admin" class="btn btn-success col-md-2">Назначить</button>
+
+                        @if (await Model.Getrole(item, "Admin"))
+                        {
+                            <button disabled asp-route-Id=@item.Id asp-page-handler="Admin" class="btn btn-success col-md-2">Назначить</button>
+                        }
+                        else
+                        {
+                            <button asp-route-Id=@item.Id asp-page-handler="Admin" class="btn btn-success col-md-2">Назначить</button>
+                        }
+
                         <button asp-page-handler="Librarian" class="btn btn-primary col-md-2">Назначить</button>
+
                         <button asp-route-Id=@item.Id asp-page-handler="DownGrade" class="btn btn-danger col-md-2">Снять</button>
                     </div>
                 </div>
@@ -52,6 +62,7 @@
                         <div class="border col-md-3">
                             @item.Name
                         </div>
+
                     </div>
                 </div>
 

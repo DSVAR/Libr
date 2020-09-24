@@ -17,29 +17,28 @@ namespace Libr.Areas.Identity.Pages.Account.Manage
        public IEnumerable<IdentityUser> users;
         public IEnumerable<IdentityRole> role;
         public UserManager<IdentityUser> UM;
-        public IdentityRole UserRole;
-     
+        public RoleManager<IdentityRole> RM;
+        public UserAndRolesRepo Rol;
+
         [BindProperty]
         public IdentityUser user { get; set; }
-     
-      [BindProperty]
+
+        [BindProperty]
         public string Name { get; set; }
-        
-        public RolesAndUserModel(ApplicationDbContext context, UserManager<IdentityUser> UMContext, UserAndRolesRepo Repocontext)
+
+        public RolesAndUserModel(ApplicationDbContext context, UserManager<IdentityUser> UMContext, UserAndRolesRepo Repocontext, RoleManager<IdentityRole> RMcontext)
         {
             Db = context;
             UM = UMContext;
             Rol = Repocontext;
+            RM = RMcontext;
         }
 
         public  void OnGet()
         {
         users= Db.Users.ToList();
             role = Db.Roles.ToList();
- 
         }
-
-       
 
         public IActionResult OnPostNewRole()
         {
@@ -51,22 +50,25 @@ namespace Libr.Areas.Identity.Pages.Account.Manage
             return Page();
         }
 
+        public async Task<bool> Getrole(IdentityUser Us, string rolo)
+        {
+            return await UM.IsInRoleAsync(Us, rolo);
+        }
+
         public async Task<IActionResult> OnPostAdmin(string id)
         {
-            string ID;
-            //var item = Db.Users.FindAsync(id);
+        
             users = Db.Users.ToList();
             foreach (var U in users)
             {
                 if (U.Id == id)
                 { 
-                //   ID  = item.Id.ToString();
+               
                 user = U;
                 }
 
             }
 
-            //await UM.AddToRoleAsync(user, "Admin");
             await Rol.UpUserAsync(user, "Admin");
             OnGet();
             return Page();
@@ -74,8 +76,7 @@ namespace Libr.Areas.Identity.Pages.Account.Manage
 
         public async Task<IActionResult> OnPostDownGrade(string id) 
         {
-            string ID;
-            //var item = Db.Users.FindAsync(id);
+         
             users = Db.Users.ToList();
             foreach (var U in users)
             {
@@ -86,7 +87,7 @@ namespace Libr.Areas.Identity.Pages.Account.Manage
                 }
 
             }
-           await Rol.downUser(user);
+            await Rol.downUser(user);
             OnGet();
             return Page();
 
