@@ -16,15 +16,21 @@ namespace Libr.Pages.Shared.books
     public class DetailOfBookModel : PageModel
     {
         private readonly IWebHostEnvironment _webHostEnvironment;
-        public IFormFile photo;
-        public IEnumerable<book> Books { get; set; }
+
+
         private readonly BookRepository bd;
 
-        public DetailOfBookModel(BookRepository context)
+        public DetailOfBookModel(BookRepository context, IWebHostEnvironment webHostEnvironment)
         {
             bd = context;
+            _webHostEnvironment = webHostEnvironment;
         }
+
         public book Book { get; set; }
+        [BindProperty]
+        public IFormFile photo { get; set; }
+        [BindProperty]
+        public string text { get; set; }
         public IActionResult OnGet(int id)
         {
             Book = bd.objectBook(id);
@@ -43,27 +49,39 @@ namespace Libr.Pages.Shared.books
         }
 
         
-        public void OnPostUpdate(int id)
+        public async Task<ActionResult> OnPostUpdate(book Pbook,int id)
         {
-        
+            
             if (photo != null)
             {
+                
 
-                if (Book.PhotoPath != null)
+                if (Pbook.PhotoPath!= null)
                 {
                     string filePath = Path.Combine(_webHostEnvironment.WebRootPath, "images", Book.PhotoPath);
                     System.IO.File.Delete(filePath);
-                    Book.PhotoPath = SaveFile.UpLoadFile(photo,_webHostEnvironment);
+
+                    //Book = new book
+                    //{
+                    //    ID = Pbook.ID,
+                    //    Author = Pbook.Author,
+                    //    count = Pbook.count,
+                    //    description = Pbook.description,
+                    //    genres = Pbook.genres,
+                    //    Name = Pbook.Name,
+                    //    PhotoPath = Pbook.PhotoPath,
+                    //    price = Pbook.price
+                    //};
+
                 }
-                bd.update(Book);
-                bd.Save();
-
+                Pbook.PhotoPath = SaveFile.UpLoadFile(photo, _webHostEnvironment);
+                
+                //   Books.PhotoPath = Pbook.PhotoPath;
             }
-            else
-            {
-                OnGet(id);
-            }
-
+            bd.update(Pbook);
+           bd.Save();
+            OnGet(id);
+            return Page() ;
         }
      
     }

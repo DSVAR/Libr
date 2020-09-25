@@ -35,8 +35,6 @@ namespace Libr.Data.Repository
         public void update(book books)
         {
             db.Entry(books).State = EntityState.Modified;
-
-      
         }
       
 
@@ -50,7 +48,7 @@ namespace Libr.Data.Repository
 
         public void Save()
         {
-            db.SaveChanges();
+         db.SaveChangesAsync();
         }
 
         

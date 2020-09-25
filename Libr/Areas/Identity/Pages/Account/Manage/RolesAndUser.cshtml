@@ -33,7 +33,7 @@
                             @item.UserName
                         </div>
 
-                        @if (await Model.Getrole(item, "Admin"))
+                        @if (await Model.Getrole(item.Id, "Admin"))
                         {
                             <button disabled asp-route-Id=@item.Id asp-page-handler="Admin" class="btn btn-success col-md-2">Назначить</button>
                         }
@@ -41,7 +41,7 @@
                         {
                             <button asp-route-Id=@item.Id asp-page-handler="Admin" class="btn btn-success col-md-2">Назначить</button>
                         }
-                        @if (await Model.Getrole(item, "Librarian"))
+                        @if (await Model.Getrole(item.Id, "Librarian"))
                         {
                             <button disabled asp-page-handler="Librarian" class="btn btn-primary col-md-2">Назначить</button>
                         }
@@ -55,24 +55,7 @@
 
             }
 
-            @foreach (var item in Model.role)
-            {
-                <div class="container-fluid">
-                    <div class="row border">
-                        <div class="border col-md-3">
-                            @item.Id
-                        </div>
-
-                        <div class="border col-md-3">
-                            @item.Name
-                        </div>
-
-                    </div>
-                </div>
-
-
-            }
-        </div>
+           
     </div>
 
 

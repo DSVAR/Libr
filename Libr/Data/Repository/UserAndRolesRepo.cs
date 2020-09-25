@@ -21,10 +21,6 @@ namespace Libr.Data.Repository
         }
 
 
-        public IEnumerable<IdentityUser> GetUsers()
-        {
-           return db.Users.ToList();
-        }
         public void save()
         {
             db.SaveChanges();
@@ -32,22 +28,27 @@ namespace Libr.Data.Repository
 
         public void AddRole(string name)
         {
-           db.Roles.Add(new IdentityRole { Name = name, NormalizedName = name.ToUpper() });
+            if (name != null) 
+            { 
+                db.Roles.Add(new IdentityRole { Name = name, NormalizedName = name.ToUpper() });
+                db.SaveChanges();
+            }
         }
 
-        public async Task UpUserAsync(IdentityUser users, string role)
+        public async Task UpUserAsync(string id, string role)
         {
-
-            await UM.AddToRoleAsync(users, role);
+            user = db.Users.Find(id);
+            await UM.AddToRoleAsync(user, role);
         }
 
         public async Task downUser(string id)
         {
+            user = db.Users.Find(id);
             string[] role = { "Admin", "Librarian" };
             await UM.RemoveFromRolesAsync(user, role);
         }
 
-        public IEnumerable<IdentityUser> allGetUser(IdentityUser user)
+        public IEnumerable<IdentityUser> allGetUser()
         {
             return db.Users.ToList();
         }
@@ -59,5 +60,9 @@ namespace Libr.Data.Repository
             return await UM.IsInRoleAsync(user, role);
         }
 
+        public IEnumerable<IdentityUser> GetUsers()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

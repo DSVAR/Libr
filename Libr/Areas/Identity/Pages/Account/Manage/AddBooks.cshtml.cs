@@ -14,6 +14,7 @@ using System.IO;
 using Libr.Data.Repository;
 using Libr.Data.Interfaces;
 using Libr.RepeatsCodes;
+using System.Threading.Tasks;
 
 namespace Libr.Areas.Identity.Pages.Account.permission
 {
@@ -47,8 +48,8 @@ namespace Libr.Areas.Identity.Pages.Account.permission
             
             if (books.Author != null && books.Name != null && books.count != 0 && books.PhotoPath != null && books.genres!=null )
             {
-                bd.Add(books);
-               bd.Save();
+                 bd.Add(books);
+                  bd.Save();
                 return RedirectToPage("AddBooks");
             }
             else return RedirectToPage("index");
