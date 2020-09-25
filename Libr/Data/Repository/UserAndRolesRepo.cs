@@ -32,7 +32,9 @@ namespace Libr.Data.Repository
 
         public void AddRole(string name)
         {
+            if (name != null) { 
            db.Roles.Add(new IdentityRole { Name = name, NormalizedName = name.ToUpper() });
+            }
         }
 
         public async Task UpUserAsync(IdentityUser users, string role)
