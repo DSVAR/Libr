@@ -7,7 +7,7 @@
     <div class="row">
         @foreach (var item in Model.Books)
         {
-            var PhotoPath = $"/images/{item.PhotoPath}";
+            var PhotoPath = $"/images/{item.PhotoPath ?? "NoImages.jpg"}";
 
             <div class="col-12 col-sm-6 col-lg-4">
                 <div class="card-deck">

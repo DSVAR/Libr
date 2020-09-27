@@ -2,11 +2,13 @@
 @model Libr.Pages.Shared.books.DetailOfBookModel
 @{
     ViewData["Title"] = "Details";
-    var photoPath = $"/images/{Model.Book.PhotoPath ?? "noimage.png"}";
+  var photoPath = $"/images/{Model.Book.PhotoPath ?? "NoImage.jpg"}";
     
 }
 
-<form actio="" method="post">
+<form actio="" method="post" enctype="multipart/form-data">
+    <input type="hidden" asp-for="Book.PhotoPath"/>
+    <input type="hidden" asp-for="Book.ID"/>
     <div class="row justify-content-center m-4">
         <div class="col col-lg-6 col-sm-4">
             <div class="card">
@@ -24,7 +26,7 @@
 
                 <div class="border border-dark">
 
-                      <input  class="InputInherit" value="@Model.Book.description"  asp-for="Book.description"/>
+                      <input  class="InputInherit" value="@Model.Book.description"  asp-for="text"/>
                  
 
                 </div>
