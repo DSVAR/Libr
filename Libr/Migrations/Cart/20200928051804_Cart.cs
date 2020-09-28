@@ -4,7 +4,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace Libr.Migrations.Cart
 {
-    public partial class Carts : Migration
+    public partial class Cart : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

@@ -21,7 +21,8 @@ namespace Libr.Pages.Shared
         public Cart carts { get; set; }
         [BindProperty]
         public book Book { get; set; }
-      
+        [BindProperty]
+        public int count { get; set; }
 
 
         public ViewBooksModel(BookRepository context,CartRepository CartContext)
@@ -44,9 +45,10 @@ namespace Libr.Pages.Shared
             carts.login = HttpContext.User.Identity.Name;
             carts.NameBook = Book.Name;
             carts.Author = Book.Author;
+            carts.count = count;
             carts.priceBook =Book.price;
             carts.Photo = Book.PhotoPath;
-            carts.FullPrice = Book.price * carts.count;
+            carts.FullPrice = Book.price *count;
             carts.status = 0;
            
 

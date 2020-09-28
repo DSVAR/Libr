@@ -22,5 +22,16 @@ namespace Libr.Areas.Identity.Pages.Account.Manage
         {
             Cast = CR.Logitem().OrderBy(n=>n.login);
         }
+
+
+        public IActionResult OnPostAccepting(int id)
+        {
+            Cart cat = CR.objectCart(id);
+            cat.status = Status.Libraly;
+            CR.update(cat);
+            CR.save();
+            OnGet();
+            return Page();
+        }
     }
 }
