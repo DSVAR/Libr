@@ -32,9 +32,9 @@ namespace Libr.Data.Repository
             db.Books.Add(books);
          
         }
-        public void update(book books)
+        public void update(book booksUpdate)
         {
-            db.Entry(books).State = EntityState.Modified;
+            db.Books.Update(booksUpdate);
         }
       
 
@@ -48,7 +48,7 @@ namespace Libr.Data.Repository
 
         public void Save()
         {
-         db.SaveChangesAsync();
+             db.SaveChanges();
         }
 
         

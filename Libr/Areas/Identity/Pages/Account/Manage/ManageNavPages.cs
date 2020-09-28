@@ -9,7 +9,8 @@ namespace Libr.Areas.Identity.Pages.Account.Manage
     public static class ManageNavPages
     {
         public static string Index => "Index";
-
+        public static string MyOrders => "MyOrders";
+        public static string Orders => "Orders";
         public static string Email => "Email";
         public static string AddBooks => "AddBooks";
         public static string RolesAndUser => "RolesAndUser";
@@ -25,6 +26,10 @@ namespace Libr.Areas.Identity.Pages.Account.Manage
 
         public static string TwoFactorAuthentication => "TwoFactorAuthentication";
 
+
+
+        public static string MyOrdersNavClass(ViewContext viewContext) => PageNavClass(viewContext, MyOrders);
+        public static string OrdersNavClass(ViewContext viewContext) => PageNavClass(viewContext, Orders);
         public static string IndexNavClass(ViewContext viewContext) => PageNavClass(viewContext, Index);
         public static string AddBooksClass(ViewContext viewContext) => PageNavClass(viewContext, AddBooks);
         public static string RolesAndUserClass(ViewContext viewContext) => PageNavClass(viewContext, RolesAndUser);

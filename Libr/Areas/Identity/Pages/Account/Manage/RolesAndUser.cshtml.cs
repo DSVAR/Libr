@@ -42,11 +42,12 @@ namespace Libr.Areas.Identity.Pages.Account.Manage
 
         public IActionResult OnPostNewRole()
         {
-            if (Name != null) { 
-            Db.Roles.Add(new IdentityRole {Name=Name,NormalizedName=Name.ToUpper() });
-            Db.SaveChanges();
-            }
-            OnGet();
+            Rol.AddRole(Name);
+
+            Rol.save();
+   
+             OnGet();
+
             return Page();
         }
 

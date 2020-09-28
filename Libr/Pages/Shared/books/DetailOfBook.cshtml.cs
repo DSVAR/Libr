@@ -25,12 +25,11 @@ namespace Libr.Pages.Shared.books
             bd = context;
             _webHostEnvironment = webHostEnvironment;
         }
-
+        [BindProperty]
         public book Book { get; set; }
         [BindProperty]
         public IFormFile photo { get; set; }
-        [BindProperty]
-        public string text { get; set; }
+
         public IActionResult OnGet(int id)
         {
             Book = bd.objectBook(id);
@@ -39,7 +38,7 @@ namespace Libr.Pages.Shared.books
             return Page();
         }
 
- 
+
         public void OnPostDelete(int id)
         {
 
@@ -48,40 +47,28 @@ namespace Libr.Pages.Shared.books
             OnGet(id);
         }
 
-        
-        public async Task<ActionResult> OnPostUpdate(book Pbook,int id)
+  
+       
+        public  ActionResult OnPostUpdate(int id)
         {
-            
+            Book.ID = id;
+       
             if (photo != null)
             {
-                
-
-                if (Pbook.PhotoPath!= null)
+                if (Book.PhotoPath!= null)
                 {
                     string filePath = Path.Combine(_webHostEnvironment.WebRootPath, "images", Book.PhotoPath);
                     System.IO.File.Delete(filePath);
 
-                    //Book = new book
-                    //{
-                    //    ID = Pbook.ID,
-                    //    Author = Pbook.Author,
-                    //    count = Pbook.count,
-                    //    description = Pbook.description,
-                    //    genres = Pbook.genres,
-                    //    Name = Pbook.Name,
-                    //    PhotoPath = Pbook.PhotoPath,
-                    //    price = Pbook.price
-                    //};
-
                 }
-                Pbook.PhotoPath = SaveFile.UpLoadFile(photo, _webHostEnvironment);
-                
-                //   Books.PhotoPath = Pbook.PhotoPath;
+                Book.PhotoPath = SaveFile.UpLoadFile(photo, _webHostEnvironment);
+               
             }
-            bd.update(Pbook);
+            bd.update(Book);
            bd.Save();
-            OnGet(id);
-            return Page() ;
+
+         //   OnGet(id);
+            return RedirectToPage("ViewBooks");
         }
      
     }

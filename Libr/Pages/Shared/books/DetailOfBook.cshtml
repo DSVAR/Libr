@@ -2,32 +2,54 @@
 @model Libr.Pages.Shared.books.DetailOfBookModel
 @{
     ViewData["Title"] = "Details";
-  var photoPath = $"/images/{Model.Book.PhotoPath ?? "NoImage.jpg"}";
-    
+    var photoPath = $"/images/{Model.Book.PhotoPath ?? "NoImage.jpg"}";
+
 }
 
-<form actio="" method="post" enctype="multipart/form-data">
-    <input type="hidden" asp-for="Book.PhotoPath"/>
-    <input type="hidden" asp-for="Book.ID"/>
+<form method="post" enctype="multipart/form-data">
+    @*<input type="hidden" asp-for="Book.PhotoPath" />*@
+        <input type="hidden" asp-for="Book.ID" />
+
     <div class="row justify-content-center m-4">
         <div class="col col-lg-6 col-sm-4">
             <div class="card">
                 <div class="card-header text-center ">
-                 <img class="card-img-top border border-primary rounded" src="@photoPath" />
+                    <img class="card-img-top border border-primary rounded" src="@photoPath" />
                 </div>
 
                 <div class="card-body">
                     <div class="text-left">
-                        <h1 class="text-center">@Model.Book.Name</h1>
-                        <h5>Автор:@Model.Book.Author</h5>
-                        <h5>Жанр:@Model.Book.genres</h5>
+                        <ul class="InputInherit">
+                            <li class="text-left">
+                                <label>Название книги</label>
+                                <input value=@Model.Book.Name asp-for="Book.Name" />
+                            </li>
+                            <li class="text-left">
+                                <label>Автор</label>
+                                <input value=@Model.Book.Author asp-for="Book.Author" />
+                            </li>
+                            <li class="text-left">
+                                <label>Цена</label>
+                                <input value="@Model.Book.price" asp-for="Book.price" />
+                            </li>
+                            <li class="text-left">
+                                <label>Количество</label>
+                                <input value="@Model.Book.count" asp-for="Book.count" />
+                            </li>
+                            <li class="text-left">
+                                <label>Жанр</label>
+                                <select asp-for="Book.genres" asp-items="Html.GetEnumSelectList<Libr.Models.Genre>()">
+                                    <option>Выберите жанр</option>
+                                </select>
+                            </li>
+                            </ul">
                     </div>
                 </div>
 
                 <div class="border border-dark">
 
-                      <input  class="InputInherit" value="@Model.Book.description"  asp-for="text"/>
-                 
+                    <input class="InputInherit" value="@Model.Book.description" asp-for="Book.description" />
+
 
                 </div>
 
@@ -37,16 +59,16 @@
                         <label class="custom-file-label text-left ">Фото книги</label>
                     </div>
                 </div>
-                
-           
+
+
 
 
                 <div class="row">
                     <div class="col">
                         <div class="card-footer text-center">
                             <a asp-page="/Shared/books/ViewBooks" class="btn btn-dark">Назад</a>
-                            <button class="btn btn-warning"  asp-page-handler="Update" type="submit">Обновить</button>
-                            <button class="btn btn-danger" asp-page-handler="Delete"   type="submit">Удалить</button>
+                            <button class="btn btn-warning" asp-route-id="@Model.Book.ID" asp-page-handler="Update" type="submit">Обновить</button>
+                            <button class="btn btn-danger" asp-page-handler="Delete" type="submit">Удалить</button>
                         </div>
                     </div>
                 </div>
@@ -59,11 +81,11 @@
 
 @section Scripts{
     <script>
-            $(document).ready(function () {
-                $('.custom-file-input').on("change", function () {
-                    var fileName = $(this).val().split("\\").pop();
-                    $(this).next('.custom-file-label').html(fileName);
-                });
+        $(document).ready(function () {
+            $('.custom-file-input').on("change", function () {
+                var fileName = $(this).val().split("\\").pop();
+                $(this).next('.custom-file-label').html(fileName);
             });
+        });
     </script>
 }

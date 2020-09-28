@@ -1,0 +1,16 @@
+﻿@page
+@model Libr.Areas.Identity.Pages.Account.Manage.OrdersModel
+@{
+}
+
+
+@foreach(var item in Model.Cast)
+{ 
+<div>
+    <h1 class="border">@item.login</h1>
+    <h1 class="border">@item.NameBook</h1>
+    <h1 class="border">@item.Author </h1>
+    <h1 class="border">@item.count</h1>
+    <h1 class="border">@item.FullPrice</h1>
+</div>
+}

@@ -1,17 +1,30 @@
 ﻿@inject SignInManager<IdentityUser> SignInManager
 @{
     var hasExternalLogins = (await SignInManager.GetExternalAuthenticationSchemesAsync()).Any();
+
 }
+
 <ul class="nav nav-pills flex-column">
-    <li class="nav-item"><a class="nav-link @ManageNavPages.IndexNavClass(ViewContext)" id="profile" asp-page="./Index">Profile</a></li>
-    <li class="nav-item"><a class="nav-link @ManageNavPages.EmailNavClass(ViewContext)" id="email" asp-page="./Email">Email</a></li>
-    <li class="nav-item"><a class="nav-link @ManageNavPages.ChangePasswordNavClass(ViewContext)" id="change-password" asp-page="./ChangePassword">Password</a></li>
-    @if (hasExternalLogins)
+    <li class="nav-item"><a class="nav-link @ManageNavPages.IndexNavClass(ViewContext)" id="profile" asp-page="./Index">Профиль</a></li>
+    <li class="nav-item"><a class="nav-link @ManageNavPages.MyOrdersNavClass(ViewContext)" id="Orders" asp-page="./MyOrders">Мои заказы</a></li>
+    <li class="nav-item"><a class="nav-link @ManageNavPages.EmailNavClass(ViewContext)" id="email" asp-page="./Email">Почта</a></li>
+    <li class="nav-item"><a class="nav-link @ManageNavPages.ChangePasswordNavClass(ViewContext)" id="change-password" asp-page="./ChangePassword">Изменить пароль</a></li>
+    @if (Context.User.IsInRole("Admin"))
     {
         <li id="external-logins" class="nav-item"><a id="external-login" class="nav-link @ManageNavPages.ExternalLoginsNavClass(ViewContext)" asp-page="./ExternalLogins">External logins</a></li>
     }
-    <li class="nav-item"><a class="nav-link @ManageNavPages.TwoFactorAuthenticationNavClass(ViewContext)" id="two-factor" asp-page="./TwoFactorAuthentication">Two-factor authentication</a></li>
-    <li class="nav-item"><a class="nav-link @ManageNavPages.PersonalDataNavClass(ViewContext)" id="personal-data" asp-page="./PersonalData">Personal data</a></li>
-    <li class="nav-item"><a class="nav-link @ManageNavPages.AddBooksClass(ViewContext)" id="AddBooks" asp-page="./AddBooks">Добавить книги</a></li>
-    <li class="nav-item"><a class="nav-link @ManageNavPages.RolesAndUserClass(ViewContext)" id="RolesAndUser" asp-page="./RolesAndUser">Роли</a></li>
+    <li class="nav-item"><a class="nav-link @ManageNavPages.TwoFactorAuthenticationNavClass(ViewContext)" id="two-factor" asp-page="./TwoFactorAuthentication">Двойная Аунтификация</a></li>
+    <li class="nav-item"><a class="nav-link @ManageNavPages.PersonalDataNavClass(ViewContext)" id="personal-data" asp-page="./PersonalData">Личная информация</a></li>
+    @if (Context.User.IsInRole("Admin") || Context.User.IsInRole("Librarian"))
+    {
+        <li class="nav-item"><a class="nav-link @ManageNavPages.AddBooksClass(ViewContext)" id="AddBooks" asp-page="./AddBooks">Добавить книги</a></li>
+    }
+    @if (Context.User.IsInRole("Admin") || Context.User.IsInRole("Librarian"))
+    {
+        <li class="nav-item"><a class="nav-link @ManageNavPages.RolesAndUserClass(ViewContext)" id="RolesAndUser" asp-page="./RolesAndUser">Роли</a></li>
+    }
+    @if (Context.User.IsInRole("Admin") || Context.User.IsInRole("Librarian"))
+    {
+        <li class="nav-item"><a class="nav-link @ManageNavPages.OrdersNavClass(ViewContext)" id="Orders" asp-page="./Orders">Заказы</a></li>
+    }
 </ul>

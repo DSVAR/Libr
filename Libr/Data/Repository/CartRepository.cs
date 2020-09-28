@@ -16,23 +16,15 @@ namespace Libr.Data.Repository
             db = context;
         }
 
-        public void Buy(Cart cart)
+        public IEnumerable<Cart> Logitem()
         {
-            
-          db.Carts.Add(cart);
-            
+            return db.Carts;
         }
 
-        public IEnumerable<Cart> CartItem(string login, string ip)
+        public IEnumerable<Cart> CartItem(string login)
         {
-            if (login == null)
-            {
-                return db.Carts.Where(log => log.ip == ip);
-            }
-            else
-            {
-                return db.Carts.Where(x => x.login ==login);
-            }
+           return db.Carts.Where(x => x.login ==login);
+           
         }
 
          public Cart objectCart(int id)
@@ -40,9 +32,9 @@ namespace Libr.Data.Repository
             return db.Carts.Find(id);
          }
 
-        public void clear(string loginOrIP)
+        public void clear(string login)
         {
-            Cart CartItem = db.Carts.Find(loginOrIP);
+            Cart CartItem = db.Carts.Find(login);
             if (CartItem != null)
                 db.Carts.RemoveRange(CartItem);
         }
@@ -52,6 +44,17 @@ namespace Libr.Data.Repository
         public void save()
         {
             db.SaveChanges();
+        }
+
+       
+        public void update(Cart name)
+        {
+            db.Carts.Update(name);
+        }
+
+        public void Offer(Cart book)
+        {
+            db.Add(book);
         }
     }
 }

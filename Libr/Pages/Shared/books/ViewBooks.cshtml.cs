@@ -21,8 +21,7 @@ namespace Libr.Pages.Shared
         public Cart carts { get; set; }
         [BindProperty]
         public book Book { get; set; }
-        public string ip { get; set; }
-        public string login { get; set; }
+      
 
 
         public ViewBooksModel(BookRepository context,CartRepository CartContext)
@@ -33,25 +32,40 @@ namespace Libr.Pages.Shared
         public void OnGet()
         {
           Books = bd.GetBooksList();
-         
-           
 
         }
 
 
-        public void OnPostOffer(int id)
+        public ActionResult OnPostOffer(int id)
         {
-            carts.login = HttpContext.User.Identity.Name;
-            carts.ip = HttpContext.Connection.LocalIpAddress.ToString();
+           
             Book = bd.objectBook(id);
-            carts.IDBook = Book.ID;
+
+            carts.login = HttpContext.User.Identity.Name;
             carts.NameBook = Book.Name;
             carts.Author = Book.Author;
-            carts.priceBook = Book.price;
+            carts.priceBook =Book.price;
+            carts.Photo = Book.PhotoPath;
+            carts.FullPrice = Book.price * carts.count;
+            carts.status = 0;
+           
 
-            CR.Buy(carts);
+
+
+            CR.Offer(carts);
             CR.save();
+
             OnGet();
+            return Page();
         }
+        
+        public ActionResult OnPostDelete(int id)
+        {
+            bd.delete(id);
+            bd.Save();
+            OnGet();
+            return RedirectToPage("ViewBooks");
+        }
+
     }
 }

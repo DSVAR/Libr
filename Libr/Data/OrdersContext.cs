@@ -13,7 +13,7 @@ namespace Libr.Data
 
         public OrdersContext(DbContextOptions<OrdersContext> options) : base(options)
         {
-            Database.EnsureCreated();     
+            Database.Migrate();     
         }
     }
 }

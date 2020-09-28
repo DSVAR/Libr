@@ -10,29 +10,29 @@
             var PhotoPath = $"/images/{item.PhotoPath ?? "NoImages.jpg"}";
 
             <div class="col-12 col-sm-6 col-lg-4">
-                <div class="card-deck">
-                    <div class="card m-4">
-                        <div class="text-center">
-                            <img class="card-img-top" src="@PhotoPath" />
+                <div class=" card-deck h-100">
+                    <div class=" card m-4">
+                        <div class="card-body">
+                            <img class=" card-img-top" src="@PhotoPath" />
                         </div>
 
-                        <div class="text-center  card-group">
+                        <div class="text-center  card-text">
                             <h3>@item.Name </h3>
                             <h3 style="color:darkcyan"> &nbsp;@item.Author</h3>
                         </div>
 
-                        <div class="text-left" >
+                        <div class="card-footer" >
                             <p>
                                 Количествo:
-                                <input class="text-center" asp-for="carts.count" min="1" value="1" style="width:15%" />
+                                <input class="text-center" asp-for="carts.count" min="1" value="1" max="@item.count" style="width:15%" />
                                 <a class="ItsaTrap">@item.price P</a>
                             </p>
                         </div>
 
                         <div class="text-center card-footer">
-                            <button asp-page-handler="Offer" asp-route-ID="@item.ID" name="action" value="OnGet" class="btn btn-success m-1">В корзину</button>
+                            <button asp-page-handler="Offer" asp-route-ID="@item.ID" name="action"  class="btn btn-success m-1">В корзину</button>
                             <a asp-page="/Shared/books/DetailOfBook" asp-route-ID="@item.ID" class="btn btn-primary m-1">Изменить</a>
-                            <a asp-page="#" asp-route-ID="@item.ID" class="btn btn-danger m-1">Удалить</a>
+                            <button asp-page-handler="Delete" asp-route-ID="@item.ID" name="action" class="btn btn-danger m-1">Удалить</button>
                         </div>
                     </div>
                 </div>

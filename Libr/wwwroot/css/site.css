@@ -82,3 +82,13 @@ body {
 .paddup{
     padding-top:50px;
 }
+
+.ImgOrder {
+    max-width: 85px;
+    max-height: 85px;
+}
+.ImgEqually {
+    width: 100%;
+    height: inherit;
+    display: inline-block
+}

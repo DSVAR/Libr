@@ -11,12 +11,16 @@ namespace Libr.Data.Models
         [Key]
         public int ID { get; set; }
         public string login { get; set; }
-        public string ip { get; set; }
-        public int IDBook { get; set; }
         public string NameBook { get; set; }
         public string Author { get; set; }
-        public ushort priceBook { get; set; }
-        public ushort count { get; set; }
+        public float priceBook { get; set; }
+        public float FullPrice { get; set; }
+        public int count { get; set; }
+        public string Photo { get; set; }
+
+        public Status? status { get; set; }
+        public string Librariant { get; set; }
+        public DateTime Issued { get; set; }
 
 
     }

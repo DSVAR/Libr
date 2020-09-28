@@ -1,9 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace Libr.Migrations.Cart
 {
-    public partial class Cart : Migration
+    public partial class Carts : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -14,12 +15,15 @@ namespace Libr.Migrations.Cart
                     ID = table.Column<int>(nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     login = table.Column<string>(nullable: true),
-                    ip = table.Column<string>(nullable: true),
-                    IDBook = table.Column<int>(nullable: false),
                     NameBook = table.Column<string>(nullable: true),
                     Author = table.Column<string>(nullable: true),
-                    priceBook = table.Column<int>(nullable: false),
-                    count = table.Column<int>(nullable: false)
+                    priceBook = table.Column<float>(nullable: false),
+                    FullPrice = table.Column<float>(nullable: false),
+                    count = table.Column<int>(nullable: false),
+                    Photo = table.Column<string>(nullable: true),
+                    status = table.Column<int>(nullable: true),
+                    Librariant = table.Column<string>(nullable: true),
+                    Issued = table.Column<DateTime>(nullable: false)
                 },
                 constraints: table =>
                 {

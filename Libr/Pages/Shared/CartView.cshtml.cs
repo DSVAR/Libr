@@ -40,7 +40,7 @@ namespace Libr.Pages.Shared
             login = HttpContext.User.Identity.Name;
             ip = HttpContext.Connection.RemoteIpAddress.ToString();
 
-                Carts = db.CartItem(login,ip);
+                Carts = db.CartItem(login);
           
 
             sum();
@@ -54,7 +54,7 @@ namespace Libr.Pages.Shared
             FullPrice = 0;
             foreach ( var item in Carts)
             {
-                FullPrice += item.priceBook;
+               
                 FullCount += item.count;
             }
         }
@@ -70,14 +70,14 @@ namespace Libr.Pages.Shared
        
             login = HttpContext.User.Identity.Name;
             ip = HttpContext.Connection.RemoteIpAddress.ToString();
-            Carts = db.CartItem(login, ip);
+            Carts = db.CartItem(login);
             foreach (var item in Carts)
             {
                 cart = db.objectCart(item.ID);
                 orders.Book = cart.NameBook;
                 orders.Author = cart.Author;
-                orders.count = cart.count;
-                orders.Price = cart.priceBook;
+            
+         
                 orders.LoginUser = login;
                 orders.Accept = false;
                 OR.Add(orders);
