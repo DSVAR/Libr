@@ -27,7 +27,7 @@ namespace Libr.Data.Repository
            
         }
 
-         public Cart objectCart(int id)
+         public Cart objectCart(string id)
          {
             return db.Carts.Find(id);
          }
@@ -46,9 +46,9 @@ namespace Libr.Data.Repository
             db.SaveChanges();
         }
 
-       public void Delete(int Id)
+       public void Delete(string Id)
         {
-            if (Id != 0) { 
+            if (Id != null) { 
             Cart cart = db.Carts.Find(Id);
            
             if (cart != null) { 

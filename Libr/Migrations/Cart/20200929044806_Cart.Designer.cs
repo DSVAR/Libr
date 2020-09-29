@@ -10,7 +10,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Libr.Migrations.Cart
 {
     [DbContext(typeof(CartContext))]
-    [Migration("20200928051804_Cart")]
+    [Migration("20200929044806_Cart")]
     partial class Cart
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -23,16 +23,17 @@ namespace Libr.Migrations.Cart
 
             modelBuilder.Entity("Libr.Data.Models.Cart", b =>
                 {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+                    b.Property<string>("ID")
+                        .HasColumnType("text");
 
                     b.Property<string>("Author")
                         .HasColumnType("text");
 
                     b.Property<float>("FullPrice")
                         .HasColumnType("real");
+
+                    b.Property<int>("IdBook")
+                        .HasColumnType("integer");
 
                     b.Property<DateTime>("Issued")
                         .HasColumnType("timestamp without time zone");

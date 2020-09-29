@@ -10,12 +10,12 @@ namespace Libr.Data.Interfaces
     {
         //IEnumerable<T> GetCartList();
         IEnumerable<T> CartItem(string login);
-        Cart objectCart(int id);
+        Cart objectCart(string id);
         void clear(string login);
         void update(T name);
         void save();
         void Offer(T book);
-        void Delete(int id);
+        void Delete(string id);
         IEnumerable<T> Logitem();
     }
 }

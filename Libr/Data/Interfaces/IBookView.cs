@@ -11,7 +11,6 @@ namespace Libr.Data.Interfaces
     {
         IEnumerable<T> GetBooksList();
         book objectBook(int bookid);
-
         void Add(T item);
         void delete(int id);
         void update(T item);

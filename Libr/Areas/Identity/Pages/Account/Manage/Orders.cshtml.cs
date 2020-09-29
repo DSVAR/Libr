@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Libr.Data.Models;
 using Libr.Data.Repository;
+using Libr.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
@@ -12,10 +13,13 @@ namespace Libr.Areas.Identity.Pages.Account.Manage
     public class OrdersModel : PageModel
     {
         public CartRepository CR;
+        public BookRepository BR;
         public IEnumerable<Cart> Cast { get; set; }
-        public OrdersModel(CartRepository context)
+        book Books { get; set; }
+        public OrdersModel(CartRepository context, BookRepository bookCOntext)
         {
             CR = context;
+            BR = bookCOntext;
         }
 
         public void OnGet()
@@ -24,7 +28,7 @@ namespace Libr.Areas.Identity.Pages.Account.Manage
         }
 
 
-        public IActionResult OnPostAccepting(int id)
+        public IActionResult OnPostAccepting(string id)
         {
             Cart cat = CR.objectCart(id);
             cat.status = Status.InLibraly;
@@ -34,17 +38,27 @@ namespace Libr.Areas.Identity.Pages.Account.Manage
             return Page();
         }
 
-        public IActionResult OnPostIssued(int id)
+        public IActionResult OnPostIssued(string id)
         {
+            
             Cart cat = CR.objectCart(id);
+          
+
             cat.status = Status.Issued;
             cat.Librariant = HttpContext.User.Identity.Name;
             cat.Issued = DateTime.Now;
 
+           
             CR.update(cat);
+        
             CR.save();
 
             return RedirectToPage("Orders");
+        }
+        public int CountBook(int id)
+        {
+            Books = BR.objectBook(id);
+            return Books.count;
         }
     }
 }

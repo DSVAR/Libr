@@ -1,6 +1,5 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
-using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace Libr.Migrations.Cart
 {
@@ -12,8 +11,8 @@ namespace Libr.Migrations.Cart
                 name: "Carts",
                 columns: table => new
                 {
-                    ID = table.Column<int>(nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    ID = table.Column<string>(nullable: false),
+                    IdBook = table.Column<int>(nullable: false),
                     login = table.Column<string>(nullable: true),
                     NameBook = table.Column<string>(nullable: true),
                     Author = table.Column<string>(nullable: true),

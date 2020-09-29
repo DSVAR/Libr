@@ -9,7 +9,8 @@ namespace Libr.Data.Models
     public class Cart
     {
         [Key]
-        public int ID { get; set; }
+        public string ID { get; set; }
+        public int IdBook { get; set; }
         public string login { get; set; }
         public string NameBook { get; set; }
         public string Author { get; set; }

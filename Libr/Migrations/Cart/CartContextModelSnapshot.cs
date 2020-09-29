@@ -21,16 +21,17 @@ namespace Libr.Migrations.Cart
 
             modelBuilder.Entity("Libr.Data.Models.Cart", b =>
                 {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+                    b.Property<string>("ID")
+                        .HasColumnType("text");
 
                     b.Property<string>("Author")
                         .HasColumnType("text");
 
                     b.Property<float>("FullPrice")
                         .HasColumnType("real");
+
+                    b.Property<int>("IdBook")
+                        .HasColumnType("integer");
 
                     b.Property<DateTime>("Issued")
                         .HasColumnType("timestamp without time zone");
