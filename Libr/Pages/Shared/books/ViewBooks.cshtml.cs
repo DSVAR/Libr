@@ -9,12 +9,15 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Web;
 using System.Net.Http;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Libr.Pages.Shared
 {
+    [Authorize(Roles = "User")]
     public class ViewBooksModel : PageModel
     {
-   
+        
+    
         public IEnumerable<book> Books { get; set; }
         private readonly BookRepository bd;
         private readonly CartRepository CR;
@@ -28,17 +31,26 @@ namespace Libr.Pages.Shared
         public string Search { get; set; }
         [BindProperty]
         public string text { get; set; }
+
+        
         public ViewBooksModel(BookRepository context,CartRepository CartContext)
         {
             bd = context;
             CR = CartContext;
+          
         }
+
+        /// <summary>
+        /// ///////////////////
+        /// </summary>
         public void OnGet()
         {
           Books = bd.GetBooksList();
 
         }
-
+        /// <summary>
+        /// ///////////////////
+        /// </summary>
 
         public ActionResult OnPostOffer(int id)
         {
@@ -64,7 +76,9 @@ namespace Libr.Pages.Shared
             OnGet();
             return Page();
         }
-        
+        /// <summary>
+        /// ///////////////////
+        /// </summary>
         public ActionResult OnPostDelete(int id)
         {
             bd.delete(id);
@@ -72,19 +86,33 @@ namespace Libr.Pages.Shared
             OnGet();
             return RedirectToPage("ViewBooks");
         }
-
+        /// <summary>
+        /// ///////////////////
+        /// </summary>
         public int counBook(int id)
         {
             Book = bd.objectBook(id);
             return Book.count;
         }
 
-
+        /// <summary>
+        /// ///////////////////
+        /// </summary>
         public ActionResult OnPostSearching() 
         {
-            string gp = Search;
-            string t = text;
-            return Page();
+            if (text != null)
+            {
+                if (Search == "Автору")
+                {
+                    Books = bd.GetBooksList().Where(A => A.Author == text);
+                }
+                if (Search == "Названию")
+                {
+                    Books = bd.GetBooksList().Where(N => N.Name == text);
+                }
+                return Page();
+            }
+            else return RedirectToPage("ViewBooks");
         }
 
     }

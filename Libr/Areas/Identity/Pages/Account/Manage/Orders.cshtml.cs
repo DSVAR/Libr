@@ -5,11 +5,13 @@ using System.Threading.Tasks;
 using Libr.Data.Models;
 using Libr.Data.Repository;
 using Libr.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace Libr.Areas.Identity.Pages.Account.Manage
 {
+    [Authorize(Roles = "User")]
     public class OrdersModel : PageModel
     {
         public CartRepository CR;

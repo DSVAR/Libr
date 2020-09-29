@@ -10,7 +10,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Libr.Migrations.Cart
 {
     [DbContext(typeof(CartContext))]
-    [Migration("20200929044806_Cart")]
+    [Migration("20200929140800_Cart")]
     partial class Cart
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

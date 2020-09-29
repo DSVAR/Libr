@@ -9,12 +9,7 @@
     <li class="nav-item"><a class="nav-link @ManageNavPages.MyOrdersNavClass(ViewContext)" id="Orders" asp-page="./MyOrders">Мои заказы</a></li>
     <li class="nav-item"><a class="nav-link @ManageNavPages.EmailNavClass(ViewContext)" id="email" asp-page="./Email">Почта</a></li>
     <li class="nav-item"><a class="nav-link @ManageNavPages.ChangePasswordNavClass(ViewContext)" id="change-password" asp-page="./ChangePassword">Изменить пароль</a></li>
-    @if (Context.User.IsInRole("Admin"))
-    {
-        <li id="external-logins" class="nav-item"><a id="external-login" class="nav-link @ManageNavPages.ExternalLoginsNavClass(ViewContext)" asp-page="./ExternalLogins">External logins</a></li>
-    }
-    <li class="nav-item"><a class="nav-link @ManageNavPages.TwoFactorAuthenticationNavClass(ViewContext)" id="two-factor" asp-page="./TwoFactorAuthentication">Двойная Аунтификация</a></li>
-    <li class="nav-item"><a class="nav-link @ManageNavPages.PersonalDataNavClass(ViewContext)" id="personal-data" asp-page="./PersonalData">Личная информация</a></li>
+
     @if (Context.User.IsInRole("Admin") || Context.User.IsInRole("Librarian"))
     {
         <li class="nav-item"><a class="nav-link @ManageNavPages.AddBooksClass(ViewContext)" id="AddBooks" asp-page="./AddBooks">Добавить книги</a></li>

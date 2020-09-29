@@ -10,9 +10,11 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Libr.RepeatsCodes;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Libr.Pages.Shared.books
 {
+    [Authorize(Roles = "Admin,Librarian")]
     public class DetailOfBookModel : PageModel
     {
         private readonly IWebHostEnvironment _webHostEnvironment;

@@ -1,6 +1,8 @@
 ﻿@page
+@inject SignInManager<IdentityUser> SignInManager
 @model Libr.Pages.Shared.ViewBooksModel
 @{
+
 }
 
 <form method="post">
@@ -14,60 +16,70 @@
                 </select>
             </label>
             <input asp-for="@Model.text" />
-            <button asp-page-handler="Searching">click</button>
+            <button class="btn btn-outline-info" asp-page-handler="Searching"><img style="max-height:20px; max-width:25px;" src="~/search.png" /></button>
         </div>
-        
+
     </div>
 </form>
-    <form method="post" asp-action="GetOffer" asp-controller="ViewBooksModel">
-        <div class="row">
+<form method="post" asp-action="GetOffer" asp-controller="ViewBooksModel">
+    <div class="row">
 
-            @foreach (var item in Model.Books)
-            {
-                var PhotoPath = $"/images/{item.PhotoPath ?? "NoImages.jpg"}";
+        @foreach (var item in Model.Books)
+        {
+            var PhotoPath = $"/images/{item.PhotoPath ?? "NoImages.jpg"}";
 
-                <div class="col-12 col-sm-6 col-lg-4">
-                    <div class=" card-deck h-100">
-                        <div class=" card m-4">
-                            <div class="card-body">
-                                <img class=" card-img-top" src="@PhotoPath" />
-                            </div>
+            <div class="col-12 col-sm-6 col-lg-4">
+                <div class=" card-deck h-100">
+                    <div class=" card m-4">
+                        <div class="card-body">
+                            <img class=" card-img-top" src="@PhotoPath" />
+                        </div>
 
-                            <div class="text-center  card-text">
-                                <h3>@item.Name </h3>
-                                <h3 style="color:darkcyan"> &nbsp;@item.Author</h3>
-                            </div>
+                        <div class="text-center  card-text">
+                            <h3>@item.Name </h3>
+                            <h3 style="color:darkcyan"> &nbsp;@item.Author</h3>
+                        </div>
 
-                            <div class="card-footer">
-                                <p>
-                                    Количествo:
-                                    <input class="text-center" asp-for="count" min="1" value="1" max="@item.count" style="width:15%" />
-                                    / @Model.counBook(item.ID)
-                                    <a class="ItsaTrap">@item.price P</a>
-                                </p>
-                            </div>
+                        <div class="card-footer">
+                            <p>
+                                Количествo:
+                                <input class="text-center" asp-for="count" min="1" value="1" max="@item.count" style="width:15%" />
+                                / @Model.counBook(item.ID)
+                                <a class="ItsaTrap">@item.price P</a>
+                            </p>
+                        </div>
 
-                            <div class="text-center card-footer">
-                                @if (@Model.counBook(item.ID) != 0)
+                        <div class="text-center card-footer">
+                            @if (Model.counBook(item.ID) != 0)
+                            {
+
+                                <button asp-page-handler="Offer" asp-route-ID="@item.ID" name="action" class="btn btn-success m-1">Забронировать</button>
+                                <a asp-page="/Shared/books/Detail" asp-route-ID="@item.ID" class="btn btn-primary m-1">подробнее</a>
+                                @if (User.IsInRole("Admin") || User.IsInRole("Librarian"))
                                 {
-                                    <button asp-page-handler="Offer" asp-route-ID="@item.ID" name="action" class="btn btn-success m-1">Забронировать</button>
                                     <a asp-page="/Shared/books/DetailOfBook" asp-route-ID="@item.ID" class="btn btn-primary m-1">Изменить</a>
                                     <button asp-page-handler="Delete" asp-route-ID="@item.ID" name="action" class="btn btn-danger m-1">Удалить</button>
                                 }
-                                else
+                            }
+                            else
+                            {
+                                <button class="btn btn-success m-1" disabled>Забронировать</button>
+                                <a asp-page="/Shared/books/Detail" asp-route-ID="@item.ID" class="btn btn-primary m-1">подробнее</a>
+                                @if (User.IsInRole("Admin") || User.IsInRole("Librarian"))
                                 {
-                                    <button class="btn btn-success m-1" disabled>Забронировать</button>
-                                    <button class="btn btn-primary m-1">подробнее</button>
+                                    <a asp-page="/Shared/books/DetailOfBook" asp-route-ID="@item.ID" class="btn btn-primary m-1">Изменить</a>
+                                    <button asp-page-handler="Delete" asp-route-ID="@item.ID" name="action" class="btn btn-danger m-1">Удалить</button>
                                 }
-                            </div>
+                            }
                         </div>
                     </div>
-
                 </div>
 
-            }
+            </div>
 
-        </div>
-    </form>
+        }
+
+    </div>
+</form>
 
 

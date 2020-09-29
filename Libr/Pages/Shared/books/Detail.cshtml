@@ -1,0 +1,73 @@
+﻿@page
+@model Libr.Pages.Shared.books.DetailModel
+@{
+    var photoPath = $"/images/{Model.Book.PhotoPath ?? "NoImage.jpg"}";
+}
+
+<form method="post" enctype="multipart/form-data">
+    @*<input type="hidden" asp-for="Book.PhotoPath" />*@
+    <input type="hidden" asp-for="Book.ID" />
+
+    <div class="row justify-content-center m-4">
+        <div class="col col-lg-6 col-sm-4">
+            <div class="card">
+                <div class="card-header text-center ">
+                    <img class="card-img-top border border-primary rounded" src="@photoPath" />
+                </div>
+
+                <div class="card-body">
+                    <div class="text-left">
+                        <ul class="list-group-item list-unstyled text-left">
+                            <li class="">
+                              
+                                <span style="color:dimgray">Название книги:</span>
+                                <span>@Model.Book.Name</span>
+                            </li>
+                            <li class="">
+                           
+                                <span style="color:dimgray">Автор:</span>
+                                <span>@Model.Book.Author</span>
+                            </li>
+                            <li class="">
+                                <span style="color:dimgray">Цена:</span>
+                                <span>@Model.Book.price</span>
+                                
+                            </li>
+                            <li class="">
+                              
+                                <span style="color:dimgray">Количество:</span>
+                                <span>@Model.Book.count</span>
+
+                            </li>
+                            <li class="">
+                             
+                                <span style="color:dimgray"> Жанр:</span>
+                                <span>@Model.Book.genres</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="border border-dark ">
+
+                
+                    <p class="text-center">@Model.Book.description</p>
+
+                </div>
+
+              
+
+
+                <div class="row">
+                    <div class="col">
+                        <div class="card-footer text-center">
+                            <a asp-page="/Shared/books/ViewBooks" class="btn btn-dark">Назад</a>
+                            <button class="btn btn-warning" asp-route-id="@Model.Book.ID" asp-page-handler="Update" type="submit">Забронировать</button>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

@@ -15,16 +15,21 @@ using Libr.Data.Repository;
 using Libr.Data.Interfaces;
 using Libr.RepeatsCodes;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Libr.Areas.Identity.Pages.Account.permission
 {
+    [Authorize(Roles = "Admin")]
     public class AddBooksModel : PageModel
     {
+       
+
         readonly IWebHostEnvironment _IwebHostEnvironment;
         BookRepository bd;
 
         public AddBooksModel(IWebHostEnvironment webHostEnvironment, BookRepository context)
         {
+            
             _IwebHostEnvironment = webHostEnvironment;
             bd = context;
 

@@ -10,9 +10,11 @@ using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Libr.Areas.Identity.Pages.Account.Manage
 {
+    [Authorize(Roles = "User")]
     public partial class EmailModel : PageModel
     {
         private readonly UserManager<IdentityUser> _userManager;
