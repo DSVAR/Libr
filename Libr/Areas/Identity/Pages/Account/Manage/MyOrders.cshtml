@@ -1,57 +1,64 @@
 ﻿@page
 @model Libr.Areas.Identity.Pages.Account.Manage.MyOrdersModel
 @{
-   
+    
 }
 
+<form method="post">
+    <div class="container-fluid">
+        <div class="row border">
+            <div class="col-md-2">
+                фото
+            </div>
 
-<div class="container-fluid">
-    <div class="row border">
-        <div class="col-md-2">
-            фото
-        </div>
+            <div class="col-md-4">
+                Имя
+            </div>
 
-        <div class="col-md-4">
-            Имя
-        </div>
+            <div class="col-md-1">
+                Кол
+            </div>
+            <div class="col-md-1">
+                Цена
+            </div>
+            <div class="col-md-2">
+                Статус
+            </div>
+            <div class="col-md-2">
+                действия
+            </div>
 
-        <div class="col-md-1">
-            Кол
-        </div>
-        <div class="col-md-2">
-            Цена
-        </div>
-        <div class="col-md-3">
-            Статус
-        </div>
-     
-       
+
             @foreach (var item in Model.cat)
             {
-                var photoPath = $"/images/{item.Photo?? "NoImages.jpg"}";
+                var photoPath = $"/images/{item.Photo ?? "NoImages.jpg"}";
                 <div class="container-fluid">
                     <div class="row border">
-                        <div class="col-md-2">
-                          <img class="ImgOrder" src="@photoPath" />
+                        <div class="border col-md-2">
+                            <img class="ImgOrder" src="@photoPath" />
                         </div>
 
-                        <div class="col-md-4">
+                        <div class="border col-md-4">
                             @item.NameBook
                         </div>
 
-                        <div class="col-md-1">
+                        <div class="border col-md-1">
                             @item.count
                         </div>
-                        <div class="col-md-2">
+                        <div class="border col-md-1">
                             @item.FullPrice
                         </div>
-                        <div class="col-md-3">
-                            @item.status.
-                        </div>
+                        <div class="border col-md-2">
 
+                            @Model.stats(item.status)
+                        </div>
+                        <div class="border col-md-2">
+                            <button asp-route-ID="@item.ID" asp-page-handler="Delete" class="btn btn-danger"> Удалить</button>
+                        </div>
                     </div>
                 </div>
-            
-             }
+
+            }
+        </div>
     </div>
-</div>
+</form>

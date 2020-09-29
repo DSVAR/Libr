@@ -15,7 +15,7 @@ namespace Libr.Data
             : base(options)
         {
 
-            Database.Migrate();
+            Database.EnsureCreated();
 
         }
     }

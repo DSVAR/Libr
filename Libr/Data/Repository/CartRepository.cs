@@ -46,7 +46,16 @@ namespace Libr.Data.Repository
             db.SaveChanges();
         }
 
-       
+       public void Delete(int Id)
+        {
+            if (Id != 0) { 
+            Cart cart = db.Carts.Find(Id);
+           
+            if (cart != null) { 
+            db.Carts.Remove(cart);
+            }
+            }
+        }
         public void update(Cart name)
         {
             db.Carts.Update(name);

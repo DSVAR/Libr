@@ -15,6 +15,7 @@ namespace Libr.Data.Interfaces
         void update(T name);
         void save();
         void Offer(T book);
+        void Delete(int id);
         IEnumerable<T> Logitem();
     }
 }

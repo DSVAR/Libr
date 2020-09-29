@@ -41,14 +41,14 @@
                     <p>@item.FullPrice</p>
                 </div>
                 <div class=" border col-md-2">
-                    @if (item.status == 0)
+                    @if (item.status == Libr.Data.Models.Status.booked)
                     {
                         <button asp-route-Id="@item.ID" asp-page-handler="Accepting" class="btn btn-success">принять</button>}
-                    @if (item.status == Libr.Data.Models.Status.Libraly)
+                    @if (item.status == Libr.Data.Models.Status.InLibraly)
                     {
                         <button asp-route-Id="@item.ID" asp-page-handler="Issued" class="btn btn-warning">выдать</button>}
 
-                    @if (item.status==Libr.Data.Models.Status.выдан) {
+                    @if (item.status==Libr.Data.Models.Status.Issued) {
                         <p style="background-color:darkblue; color:white; ">Была выдана </p>
                     }
                 </div>

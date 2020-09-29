@@ -27,11 +27,24 @@ namespace Libr.Areas.Identity.Pages.Account.Manage
         public IActionResult OnPostAccepting(int id)
         {
             Cart cat = CR.objectCart(id);
-            cat.status = Status.Libraly;
+            cat.status = Status.InLibraly;
             CR.update(cat);
             CR.save();
             OnGet();
             return Page();
+        }
+
+        public IActionResult OnPostIssued(int id)
+        {
+            Cart cat = CR.objectCart(id);
+            cat.status = Status.Issued;
+            cat.Librariant = HttpContext.User.Identity.Name;
+            cat.Issued = DateTime.Now;
+
+            CR.update(cat);
+            CR.save();
+
+            return RedirectToPage("Orders");
         }
     }
 }

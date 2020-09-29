@@ -9,9 +9,11 @@ namespace Libr.Data.Models
 {
     public enum Status
     {
-        Забронирован,
-     //   [Description(Name="Ожидает в библиотеке")] Libraly,
-        выдан
+        [Description("забронирован")]booked,
+        //Забронирован,
+        [Description( "Ожидает в библиотеке")] InLibraly,
+        //[Description("Ожидает в библиотеке")] InLibraly,
+        [Description("Выдан")] Issued,
 
     }
 }
