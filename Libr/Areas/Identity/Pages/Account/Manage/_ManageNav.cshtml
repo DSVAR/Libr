@@ -14,12 +14,13 @@
     {
         <li class="nav-item"><a class="nav-link @ManageNavPages.AddBooksClass(ViewContext)" id="AddBooks" asp-page="./AddBooks">Добавить книги</a></li>
     }
-    @if (Context.User.IsInRole("Admin") || Context.User.IsInRole("Librarian"))
+    @if (Context.User.IsInRole("Admin"))
     {
         <li class="nav-item"><a class="nav-link @ManageNavPages.RolesAndUserClass(ViewContext)" id="RolesAndUser" asp-page="./RolesAndUser">Роли</a></li>
     }
     @if (Context.User.IsInRole("Admin") || Context.User.IsInRole("Librarian"))
     {
         <li class="nav-item"><a class="nav-link @ManageNavPages.OrdersNavClass(ViewContext)" id="Orders" asp-page="./Orders">Заказы</a></li>
+        <li class="nav-item"><a class="nav-link @ManageNavPages.ChangePasswordUserNavClass(ViewContext)" id="CPUN" asp-page="./AdminChange_password">Изменить пароль</a></li>
     }
 </ul>

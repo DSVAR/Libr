@@ -15,7 +15,7 @@ namespace Libr.Areas.Identity.Pages.Account.Manage
         public static string AddBooks => "AddBooks";
         public static string RolesAndUser => "RolesAndUser";
         public static string ChangePassword => "ChangePassword";
-
+        public static string ChangePasswordUser => "ChangePasswordUser";
 
 
 
@@ -27,7 +27,7 @@ namespace Libr.Areas.Identity.Pages.Account.Manage
         public static string EmailNavClass(ViewContext viewContext) => PageNavClass(viewContext, Email);
 
         public static string ChangePasswordNavClass(ViewContext viewContext) => PageNavClass(viewContext, ChangePassword);
-
+        public static string ChangePasswordUserNavClass(ViewContext viewContext) => PageNavClass(viewContext, ChangePasswordUser);
 
         private static string PageNavClass(ViewContext viewContext, string page)
         {
