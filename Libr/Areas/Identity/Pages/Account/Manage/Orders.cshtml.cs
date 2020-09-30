@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace Libr.Areas.Identity.Pages.Account.Manage
 {
-    [Authorize(Roles = "User")]
+    [Authorize(Roles = "Admin,Librarian")]
     public class OrdersModel : PageModel
     {
         public CartRepository CR;
@@ -26,7 +26,7 @@ namespace Libr.Areas.Identity.Pages.Account.Manage
 
         public void OnGet()
         {
-            Cast = CR.Logitem().OrderBy(n=>n.login);
+            Cast = CR.Logitem().OrderBy(n => n.login).Where(S => S.status != Status.Issued);
         }
 
 

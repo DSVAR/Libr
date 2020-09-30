@@ -53,7 +53,15 @@
                             @Model.stats(item.status)
                         </div>
                         <div class="border col-md-2">
-                            <button asp-route-ID="@item.ID" asp-page-handler="Delete" class="btn btn-danger"> Удалить</button>
+                            @if (item.status != Libr.Data.Models.Status.Issued)
+                            {
+                                <button asp-route-ID="@item.ID" asp-page-handler="Delete" class="btn btn-danger"> Удалить</button>
+                            }
+                            else
+                            {
+                                <button disabled class="btn btn-danger"> Удалить</button>
+                            }
+
                         </div>
                     </div>
                 </div>

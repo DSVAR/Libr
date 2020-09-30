@@ -1,0 +1,47 @@
+﻿@page
+@model Libr.Areas.Identity.Pages.Account.Manage.HistoryOrdersModel
+@{
+}
+
+
+<div class="container-fluid border">
+    <div class="row">
+        <div class="col-3 border">
+            Название книги
+        </div>
+        <div class="col-3 border">
+            Автор
+        </div>
+        <div class="col-3 border">
+            Время
+        </div>
+        <div class="col-2 border">
+            Выдан
+        </div>
+        <div class="col-1 border">
+            Кол.
+        </div>
+        @foreach (var item in Model.carts)
+        {
+            <div class="container-fluid border">
+                <div class="row">
+                    <div class="col-3 border">
+                        @item.NameBook
+                    </div>
+                    <div class="col-3 border">
+                        @item.Author
+                    </div>
+                    <div class="col-3 border">
+                        @item.Issued
+                    </div>
+                    <div class="col-2 border">
+                        @item.Librariant
+                    </div>
+                    <div class="col-1 border">
+                        @item.count
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

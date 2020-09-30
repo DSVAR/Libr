@@ -43,21 +43,16 @@ namespace Libr
                options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
             services.AddDbContext<CartContext>(options =>
              options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
-            services.AddDbContext<OrdersContext>(options =>
-            options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
-            //    services.AddIdentity<IdentityUser, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = true)
-            //.AddEntityFrameworkStores<ApplicationDbContext>();
-            //неправильно написанный код в userManager!
+       
 
 
 
             services.AddScoped<BookRepository>();
             services.AddScoped<CartRepository>();
-            services.AddScoped<OrdersRepository>();
             services.AddScoped<UserManager<IdentityUser>>();
             services.AddScoped<UserAndRolesRepo>();
 

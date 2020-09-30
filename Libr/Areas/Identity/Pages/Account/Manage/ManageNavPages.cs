@@ -16,9 +16,10 @@ namespace Libr.Areas.Identity.Pages.Account.Manage
         public static string RolesAndUser => "RolesAndUser";
         public static string ChangePassword => "ChangePassword";
         public static string ChangePasswordUser => "ChangePasswordUser";
+        public static string HistoryOrder => "HistoryOrder";
 
 
-
+       
         public static string MyOrdersNavClass(ViewContext viewContext) => PageNavClass(viewContext, MyOrders);
         public static string OrdersNavClass(ViewContext viewContext) => PageNavClass(viewContext, Orders);
         public static string IndexNavClass(ViewContext viewContext) => PageNavClass(viewContext, Index);
@@ -28,7 +29,7 @@ namespace Libr.Areas.Identity.Pages.Account.Manage
 
         public static string ChangePasswordNavClass(ViewContext viewContext) => PageNavClass(viewContext, ChangePassword);
         public static string ChangePasswordUserNavClass(ViewContext viewContext) => PageNavClass(viewContext, ChangePasswordUser);
-
+        public static string HistoryOrderNavClass(ViewContext viewContext) => PageNavClass(viewContext, HistoryOrder);
         private static string PageNavClass(ViewContext viewContext, string page)
         {
             var activePage = viewContext.ViewData["ActivePage"] as string

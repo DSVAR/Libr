@@ -22,7 +22,8 @@ namespace Libr.Areas.Identity.Pages.Account.Manage
             UM = UMContext;
             db = context;
         }
-
+        [BindProperty]
+        public string NewPassword { get; set; }
         public void OnGet()
         {
             users = db.Users.ToList();
@@ -37,6 +38,36 @@ namespace Libr.Areas.Identity.Pages.Account.Manage
             var password = await UM.GeneratePasswordResetTokenAsync(us);
 
             return Page();
+        }
+
+        public async Task<IActionResult> OnPostChangePassword(string id,string email)
+        {
+            IdentityUser User = await UM.FindByIdAsync(id);
+            
+            NewPassword = Request.Form.FirstOrDefault(E => E.Key == User.Email.ToString()).Value;
+            if (User != null)
+            {
+                var _passwordValidator =
+                HttpContext.RequestServices.GetService(typeof(IPasswordValidator<IdentityUser>)) as IPasswordValidator<IdentityUser>;
+                var _passwordHasher =
+                    HttpContext.RequestServices.GetService(typeof(IPasswordHasher<IdentityUser>)) as IPasswordHasher<IdentityUser>;
+
+                    User.PasswordHash = _passwordHasher.HashPassword(User, NewPassword);
+                    await UM.UpdateAsync(User);
+                    
+                    return RedirectToAction("AdminChange_password");
+                
+            }
+            return Page();
+        }
+        public async Task<IActionResult> OnPostDeleteUs(string id)
+        {
+            IdentityUser user;
+            user = await UM.FindByIdAsync(id);
+            if(user!=null)
+            await UM.DeleteAsync(user);
+
+            return RedirectToAction("AdminChange_password");
         }
     }
 }

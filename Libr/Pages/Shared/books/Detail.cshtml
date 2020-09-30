@@ -19,28 +19,34 @@
                     <div class="text-left">
                         <ul class="list-group-item list-unstyled text-left">
                             <li class="">
-                              
+
                                 <span style="color:dimgray">Название книги:</span>
                                 <span>@Model.Book.Name</span>
                             </li>
                             <li class="">
-                           
+
                                 <span style="color:dimgray">Автор:</span>
                                 <span>@Model.Book.Author</span>
                             </li>
                             <li class="">
                                 <span style="color:dimgray">Цена:</span>
                                 <span>@Model.Book.price</span>
-                                
-                            </li>
-                            <li class="">
-                              
-                                <span style="color:dimgray">Количество:</span>
-                                <span>@Model.Book.count</span>
 
                             </li>
                             <li class="">
-                             
+                               
+
+                                <span style="color:dimgray">Количество:</span>
+                                <span>
+                                  
+                                    <input class="text-center" asp-for="count" min="1" value="1" max="@Model.Book.count" style="width:15%" />
+
+                                </span>
+                                <span>/ @Model.Book.count</span>
+
+                            </li>
+                            <li class="">
+
                                 <span style="color:dimgray"> Жанр:</span>
                                 <span>@Model.Book.genres</span>
                             </li>
@@ -50,20 +56,26 @@
 
                 <div class="border border-dark ">
 
-                
+
                     <p class="text-center">@Model.Book.description</p>
 
                 </div>
 
-              
+
 
 
                 <div class="row">
                     <div class="col">
                         <div class="card-footer text-center">
                             <a asp-page="/Shared/books/ViewBooks" class="btn btn-dark">Назад</a>
-                            <button class="btn btn-warning" asp-route-id="@Model.Book.ID" asp-page-handler="Update" type="submit">Забронировать</button>
-                            
+                            @if (Model.counBook(Model.Book.ID) != 0)
+                            {
+                                <button class="btn btn-warning" asp-route-id="@Model.Book.ID" asp-page-handler="Offer" type="submit">Забронировать</button>
+                            }
+                            else
+                            {
+                                <button disabled class="btn btn-warning">Забронировать</button>
+                            }
                         </div>
                     </div>
                 </div>

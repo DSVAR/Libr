@@ -29,6 +29,7 @@ namespace Libr.Pages.Shared.books
         }
         [BindProperty]
         public book Book { get; set; }
+        book photos { get; set; }
         [BindProperty]
         public IFormFile photo { get; set; }
 
@@ -49,22 +50,27 @@ namespace Libr.Pages.Shared.books
             OnGet(id);
         }
 
-  
-       
-        public  ActionResult OnPostUpdate(int id)
+
+
+        public ActionResult OnPostUpdate(int id)
         {
             Book.ID = id;
-       
+
             if (photo != null)
             {
-                if (Book.PhotoPath!= null)
+                if (Book.PhotoPath != null)
                 {
                     string filePath = Path.Combine(_webHostEnvironment.WebRootPath, "images", Book.PhotoPath);
                     System.IO.File.Delete(filePath);
 
                 }
                 Book.PhotoPath = SaveFile.UpLoadFile(photo, _webHostEnvironment);
-               
+
+            }
+            else
+            {
+                photos = bd.objectBook(id);   
+                Book.PhotoPath = photos.PhotoPath;
             }
             bd.update(Book);
            bd.Save();
